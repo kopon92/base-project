@@ -1,0 +1,2939 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="kernel.project_dir">/app/apps/backoffice/backend</parameter>
+    <parameter key="kernel.environment">dev</parameter>
+    <parameter key="kernel.debug">true</parameter>
+    <parameter key="kernel.cache_dir">/app/apps/backoffice/backend/var/cache/dev</parameter>
+    <parameter key="kernel.logs_dir">/app/apps/backoffice/backend/var/log</parameter>
+    <parameter key="kernel.bundles" type="collection">
+      <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
+    </parameter>
+    <parameter key="kernel.bundles_metadata" type="collection">
+      <parameter key="FrameworkBundle" type="collection">
+        <parameter key="path">/app/vendor/symfony/framework-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
+      </parameter>
+    </parameter>
+    <parameter key="kernel.charset">UTF-8</parameter>
+    <parameter key="kernel.container_class">App_Backoffice_Backend_BackofficeBackendKernelDevDebugContainer</parameter>
+    <parameter key="container.dumper.inline_class_loader">true</parameter>
+    <parameter key="fragment.renderer.hinclude.global_template"></parameter>
+    <parameter key="fragment.path">/_fragment</parameter>
+    <parameter key="kernel.secret">%env(APP_SECRET)%</parameter>
+    <parameter key="kernel.http_method_override">true</parameter>
+    <parameter key="kernel.trusted_hosts" type="collection"/>
+    <parameter key="kernel.default_locale">en</parameter>
+    <parameter key="kernel.error_controller">error_controller</parameter>
+    <parameter key="debug.file_link_format">null</parameter>
+    <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
+    <parameter key="session.storage.options" type="collection">
+      <parameter key="cache_limiter" type="string">0</parameter>
+      <parameter key="cookie_secure">auto</parameter>
+      <parameter key="cookie_httponly">true</parameter>
+      <parameter key="cookie_samesite">lax</parameter>
+      <parameter key="gc_probability">1</parameter>
+    </parameter>
+    <parameter key="session.save_path">/app/apps/backoffice/backend/var/cache/dev/sessions</parameter>
+    <parameter key="session.metadata.update_threshold">0</parameter>
+    <parameter key="form.type_extension.csrf.enabled">true</parameter>
+    <parameter key="form.type_extension.csrf.field_name">_token</parameter>
+    <parameter key="asset.request_context.base_path"></parameter>
+    <parameter key="asset.request_context.secure">false</parameter>
+    <parameter key="validator.mapping.cache.prefix"></parameter>
+    <parameter key="validator.mapping.cache.file">/app/apps/backoffice/backend/var/cache/dev/validation.php</parameter>
+    <parameter key="validator.translation_domain">validators</parameter>
+    <parameter key="translator.logging">false</parameter>
+    <parameter key="translator.default_path">/app/apps/backoffice/backend/translations</parameter>
+    <parameter key="data_collector.templates" type="collection"/>
+    <parameter key="debug.error_handler.throw_at">-1</parameter>
+    <parameter key="debug.container.dump">/app/apps/backoffice/backend/var/cache/dev/App_Backoffice_Backend_BackofficeBackendKernelDevDebugContainer.xml</parameter>
+    <parameter key="router.request_context.host">localhost</parameter>
+    <parameter key="router.request_context.scheme">http</parameter>
+    <parameter key="router.request_context.base_url"></parameter>
+    <parameter key="router.resource">kernel::loadRoutes</parameter>
+    <parameter key="request_listener.http_port">80</parameter>
+    <parameter key="request_listener.https_port">443</parameter>
+    <parameter key="serializer.mapping.cache.file">/app/apps/backoffice/backend/var/cache/dev/serialization.php</parameter>
+    <parameter key="serializer.mapping.cache.prefix"></parameter>
+    <parameter key="console.command.ids" type="collection"/>
+  </parameters>
+  <services>
+    <service id="service_container" class="Symfony\Component\DependencyInjection\ContainerInterface" public="true" synthetic="true"/>
+    <service id="kernel" class="App\Backoffice\Backend\BackofficeBackendKernel" public="true" synthetic="true">
+      <tag name="routing.route_loader"/>
+    </service>
+    <service id="App\Shared\Domain\Assert" class="App\Shared\Domain\Assert" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Domain\Criteria\Criteria" class="App\Shared\Domain\Criteria\Criteria" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Domain\Criteria\Filter" class="App\Shared\Domain\Criteria\Filter" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Shared\Domain\Criteria\FilterField"/>
+      <argument type="service" id="App\Shared\Domain\Criteria\FilterOperator"/>
+      <argument type="service" id="App\Shared\Domain\Criteria\FilterValue"/>
+    </service>
+    <service id="App\Shared\Domain\Criteria\FilterField" class="App\Shared\Domain\Criteria\FilterField" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Domain\Criteria\FilterOperator" class="App\Shared\Domain\Criteria\FilterOperator" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Domain\Criteria\FilterValue" class="App\Shared\Domain\Criteria\FilterValue" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Domain\Criteria\Filters" class="App\Shared\Domain\Criteria\Filters" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Domain\Criteria\Order" class="App\Shared\Domain\Criteria\Order" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Shared\Domain\Criteria\OrderBy"/>
+      <argument type="service" id="App\Shared\Domain\Criteria\OrderType"/>
+    </service>
+    <service id="App\Shared\Domain\Criteria\OrderBy" class="App\Shared\Domain\Criteria\OrderBy" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Domain\Criteria\OrderType" class="App\Shared\Domain\Criteria\OrderType" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Domain\Utils" class="App\Shared\Domain\Utils" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Domain\ValueObject\Uuid" class="App\Shared\Domain\ValueObject\Uuid" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Bus\CallableFirstParameterExtractor" class="App\Shared\Infrastructure\Bus\CallableFirstParameterExtractor" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Bus\Command\CommandNotRegisteredError" class="App\Shared\Infrastructure\Bus\Command\CommandNotRegisteredError" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommand"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus" class="App\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus" autowire="true" autoconfigure="true">
+      <argument type="tagged_iterator" tag="codely.command_handler"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Bus\Event\DomainEventJsonDeserializer" class="App\Shared\Infrastructure\Bus\Event\DomainEventJsonDeserializer" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Shared\Infrastructure\Bus\Event\DomainEventMapping"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Bus\Event\DomainEventJsonSerializer" class="App\Shared\Infrastructure\Bus\Event\DomainEventJsonSerializer" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Bus\Event\DomainEventMapping" class="App\Shared\Infrastructure\Bus\Event\DomainEventMapping" autowire="true" autoconfigure="true">
+      <argument type="tagged_iterator" tag="app.domain_event_subscriber"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator" class="App\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator" autowire="true" autoconfigure="true">
+      <argument type="tagged_iterator" tag="app.domain_event_subscriber"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus" class="App\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus" lazy="true" autowire="true" autoconfigure="true">
+      <argument type="tagged_iterator" tag="app.domain_event_subscriber"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Bus\Event\MySql\MySqlDoctrineDomainEventsConsumer" class="App\Shared\Infrastructure\Bus\Event\MySql\MySqlDoctrineDomainEventsConsumer" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Bus\Event\MySql\MySqlDoctrineEventBus" class="App\Shared\Infrastructure\Bus\Event\MySql\MySqlDoctrineEventBus" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus" class="App\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus" autowire="true" autoconfigure="true">
+      <argument type="tagged_iterator" tag="codely.query_handler"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Bus\Query\QueryNotRegisteredError" class="App\Shared\Infrastructure\Bus\Query\QueryNotRegisteredError" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Doctrine\DatabaseConnections" class="App\Shared\Infrastructure\Doctrine\DatabaseConnections" autowire="true" autoconfigure="true">
+      <argument type="tagged_iterator" tag="app.database_connection"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Doctrine\Dbal\DbalCustomTypesRegistrar" class="App\Shared\Infrastructure\Doctrine\Dbal\DbalCustomTypesRegistrar" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Doctrine\DoctrineEntityManagerFactory" class="App\Shared\Infrastructure\Doctrine\DoctrineEntityManagerFactory" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Logger\MonologLogger" class="App\Shared\Infrastructure\Logger\MonologLogger" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Persistence\Doctrine\DoctrineCriteriaConverter" class="App\Shared\Infrastructure\Persistence\Doctrine\DoctrineCriteriaConverter" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Shared\Domain\Criteria\Criteria"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Persistence\Elasticsearch\ElasticQueryGenerator" class="App\Shared\Infrastructure\Persistence\Elasticsearch\ElasticQueryGenerator" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Persistence\Elasticsearch\ElasticsearchCriteriaConverter" class="App\Shared\Infrastructure\Persistence\Elasticsearch\ElasticsearchCriteriaConverter" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\PhpRandomNumberGenerator" class="App\Shared\Infrastructure\PhpRandomNumberGenerator" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\RamseyUuidGenerator" class="App\Shared\Infrastructure\RamseyUuidGenerator" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Symfony\AddJsonBodyToRequestListener" class="App\Shared\Infrastructure\Symfony\AddJsonBodyToRequestListener" autowire="true" autoconfigure="true">
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+      <tag name="container.hot_path"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Symfony\ApiExceptionListener" class="App\Shared\Infrastructure\Symfony\ApiExceptionListener" autowire="true" autoconfigure="true">
+      <tag name="kernel.event_listener" event="kernel.exception" method="onException"/>
+      <argument type="service" id="App\Shared\Infrastructure\Symfony\ApiExceptionsHttpStatusCodeMapping"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Symfony\ApiExceptionsHttpStatusCodeMapping" class="App\Shared\Infrastructure\Symfony\ApiExceptionsHttpStatusCodeMapping" autowire="true" autoconfigure="true"/>
+    <service id="App\Shared\Infrastructure\Symfony\BasicHttpAuthMiddleware" class="App\Shared\Infrastructure\Symfony\BasicHttpAuthMiddleware" autowire="true" autoconfigure="true">
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="App\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus"/>
+    </service>
+    <service id="App\Shared\Infrastructure\Symfony\FlashSession" class="App\Shared\Infrastructure\Symfony\FlashSession" autowire="true" autoconfigure="true">
+      <argument type="service" id="session"/>
+    </service>
+    <service id="App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommand" class="App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommand" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommandHandler" class="App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommandHandler" autowire="true" autoconfigure="true">
+      <tag name="app.command_handler"/>
+      <argument type="service" id="App\Backoffice\Auth\Application\Authenticate\UserAuthenticator"/>
+    </service>
+    <service id="App\Backoffice\Auth\Application\Authenticate\UserAuthenticator" class="App\Backoffice\Auth\Application\Authenticate\UserAuthenticator" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Backoffice\Auth\Infrastructure\Persistence\InMemoryAuthRepository"/>
+    </service>
+    <service id="App\Backoffice\Auth\Domain\AuthPassword" class="App\Backoffice\Auth\Domain\AuthPassword" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Auth\Domain\AuthUser" class="App\Backoffice\Auth\Domain\AuthUser" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Backoffice\Auth\Domain\AuthUsername"/>
+      <argument type="service" id="App\Backoffice\Auth\Domain\AuthPassword"/>
+    </service>
+    <service id="App\Backoffice\Auth\Domain\AuthUsername" class="App\Backoffice\Auth\Domain\AuthUsername" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Auth\Domain\InvalidAuthCredentials" class="App\Backoffice\Auth\Domain\InvalidAuthCredentials" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Backoffice\Auth\Domain\AuthUsername"/>
+    </service>
+    <service id="App\Backoffice\Auth\Domain\InvalidAuthUsername" class="App\Backoffice\Auth\Domain\InvalidAuthUsername" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Backoffice\Auth\Domain\AuthUsername"/>
+    </service>
+    <service id="App\Backoffice\Auth\Infrastructure\Persistence\InMemoryAuthRepository" class="App\Backoffice\Auth\Infrastructure\Persistence\InMemoryAuthRepository" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Application\BackofficeCourseResponse" class="App\Backoffice\Courses\Application\BackofficeCourseResponse" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Application\BackofficeCoursesResponse" class="App\Backoffice\Courses\Application\BackofficeCoursesResponse" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Application\Create\BackofficeCourseCreator" class="App\Backoffice\Courses\Application\Create\BackofficeCourseCreator" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Application\Create\CreateBackofficeCourseOnCourseCreated" class="App\Backoffice\Courses\Application\Create\CreateBackofficeCourseOnCourseCreated" autowire="true" autoconfigure="true">
+      <tag name="app.domain_event_subscriber"/>
+      <argument type="service" id="App\Backoffice\Courses\Application\Create\BackofficeCourseCreator"/>
+    </service>
+    <service id="App\Backoffice\Courses\Application\SearchAll\AllBackofficeCoursesSearcher" class="App\Backoffice\Courses\Application\SearchAll\AllBackofficeCoursesSearcher" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Application\SearchAll\SearchAllBackofficeCoursesQuery" class="App\Backoffice\Courses\Application\SearchAll\SearchAllBackofficeCoursesQuery" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Application\SearchAll\SearchAllBackofficeCoursesQueryHandler" class="App\Backoffice\Courses\Application\SearchAll\SearchAllBackofficeCoursesQueryHandler" autowire="true" autoconfigure="true">
+      <tag name="app.query_handler"/>
+      <argument type="service" id="App\Backoffice\Courses\Application\SearchAll\AllBackofficeCoursesSearcher"/>
+    </service>
+    <service id="App\Backoffice\Courses\Application\SearchByCriteria\BackofficeCoursesByCriteriaSearcher" class="App\Backoffice\Courses\Application\SearchByCriteria\BackofficeCoursesByCriteriaSearcher" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Application\SearchByCriteria\SearchBackofficeCoursesByCriteriaQuery" class="App\Backoffice\Courses\Application\SearchByCriteria\SearchBackofficeCoursesByCriteriaQuery" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Application\SearchByCriteria\SearchBackofficeCoursesByCriteriaQueryHandler" class="App\Backoffice\Courses\Application\SearchByCriteria\SearchBackofficeCoursesByCriteriaQueryHandler" autowire="true" autoconfigure="true">
+      <tag name="app.query_handler"/>
+      <argument type="service" id="App\Backoffice\Courses\Application\SearchByCriteria\BackofficeCoursesByCriteriaSearcher"/>
+    </service>
+    <service id="App\Backoffice\Courses\Domain\BackofficeCourse" class="App\Backoffice\Courses\Domain\BackofficeCourse" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Infrastructure\Persistence\ElasticsearchBackofficeCourseRepository" class="App\Backoffice\Courses\Infrastructure\Persistence\ElasticsearchBackofficeCourseRepository" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Infrastructure\Persistence\InMemoryCacheBackofficeCourseRepository" class="App\Backoffice\Courses\Infrastructure\Persistence\InMemoryCacheBackofficeCourseRepository" autowire="true" autoconfigure="true"/>
+    <service id="App\Backoffice\Courses\Infrastructure\Persistence\MySqlBackofficeCourseRepository" class="App\Backoffice\Courses\Infrastructure\Persistence\MySqlBackofficeCourseRepository" autowire="true" autoconfigure="true"/>
+    <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory" public="false"/>
+    <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <argument>UTF-8</argument>
+    </service>
+    <service id="streamed_response_listener" class="Symfony\Component\HttpKernel\EventListener\StreamedResponseListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+    </service>
+    <service id="locale_listener" class="Symfony\Component\HttpKernel\EventListener\LocaleListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <tag name="container.hot_path"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="request_stack"/>
+      <argument>en</argument>
+      <argument type="service" id="router.default" on-invalid="ignore"/>
+    </service>
+    <service id="validate_request_listener" class="Symfony\Component\HttpKernel\EventListener\ValidateRequestListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+    </service>
+    <service id="disallow_search_engine_index_response_listener" class="Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+    </service>
+    <service id="error_controller" class="Symfony\Component\HttpKernel\Controller\ErrorController" public="true">
+      <argument type="service" id="http_kernel"/>
+      <argument>error_controller</argument>
+      <argument type="service" id="error_handler.error_renderer.serializer"/>
+    </service>
+    <service id="exception_listener" class="Symfony\Component\HttpKernel\EventListener\ErrorListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="monolog.logger" channel="request"/>
+      <tag name="container.hot_path"/>
+      <argument>error_controller</argument>
+      <argument type="service" id="logger" on-invalid="null"/>
+      <argument>true</argument>
+    </service>
+    <service id="parameter_bag" class="Symfony\Component\DependencyInjection\ParameterBag\ContainerBag" public="false">
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="http_kernel" class="Symfony\Component\HttpKernel\HttpKernel" public="true">
+      <tag name="container.hot_path"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="debug.controller_resolver"/>
+      <argument type="service" id="request_stack"/>
+      <argument type="service" id="debug.argument_resolver"/>
+    </service>
+    <service id="request_stack" class="Symfony\Component\HttpFoundation\RequestStack" public="true"/>
+    <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper" public="false">
+      <argument type="service" id="request_stack"/>
+      <argument type="service" id="router.request_context" on-invalid="ignore"/>
+    </service>
+    <service id="cache_warmer" class="Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate" public="true">
+      <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
+      <argument>true</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/App_Backoffice_Backend_BackofficeBackendKernelDevDebugContainerDeprecations.log</argument>
+    </service>
+    <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer" public="true">
+      <argument type="tagged_iterator" tag="kernel.cache_clearer"/>
+    </service>
+    <service id="filesystem" class="Symfony\Component\Filesystem\Filesystem" public="true"/>
+    <service id="file_locator" class="Symfony\Component\HttpKernel\Config\FileLocator" public="false">
+      <argument type="service" id="kernel"/>
+    </service>
+    <service id="uri_signer" class="Symfony\Component\HttpKernel\UriSigner" public="false">
+      <argument>%env(APP_SECRET)%</argument>
+    </service>
+    <service id="config_cache_factory" class="Symfony\Component\Config\ResourceCheckerConfigCacheFactory" public="false">
+      <argument type="tagged_iterator" tag="config_cache.resource_checker"/>
+    </service>
+    <service id="dependency_injection.config.container_parameters_resource_checker" class="Symfony\Component\DependencyInjection\Config\ContainerParametersResourceChecker" public="false">
+      <tag name="config_cache.resource_checker" priority="-980"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="config.resource.self_checking_resource_checker" class="Symfony\Component\Config\Resource\SelfCheckingResourceChecker" public="false">
+      <tag name="config_cache.resource_checker" priority="-990"/>
+    </service>
+    <service id="services_resetter" class="Symfony\Component\HttpKernel\DependencyInjection\ServicesResetter" public="true">
+      <argument type="iterator">
+        <argument key="cache.app" type="service" id="cache.app" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.system" type="service" id="cache.system" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.validator" type="service" id="cache.validator" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.serializer" type="service" id="cache.serializer" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.annotations" type="service" id="cache.annotations" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.property_info" type="service" id="cache.property_info" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.messenger.restart_workers_signal" type="service" id="cache.messenger.restart_workers_signal" on-invalid="ignore_uninitialized"/>
+        <argument key="form.choice_list_factory.cached" type="service" id="form.choice_list_factory.cached" on-invalid="ignore_uninitialized"/>
+        <argument key="messenger.transport.in_memory.factory" type="service" id="messenger.transport.in_memory.factory" on-invalid="ignore_uninitialized"/>
+        <argument key="debug.stopwatch" type="service" id="debug.stopwatch" on-invalid="ignore_uninitialized"/>
+        <argument key="debug.event_dispatcher" type="service" id="debug.event_dispatcher" on-invalid="ignore_uninitialized"/>
+      </argument>
+      <argument type="collection">
+        <argument key="cache.app" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="cache.system" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="cache.validator" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="cache.serializer" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="cache.annotations" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="cache.property_info" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="cache.messenger.restart_workers_signal" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="form.choice_list_factory.cached" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="messenger.transport.in_memory.factory" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="debug.stopwatch" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="debug.event_dispatcher" type="collection">
+          <argument>reset</argument>
+        </argument>
+      </argument>
+    </service>
+    <service id="reverse_container" class="Symfony\Component\DependencyInjection\ReverseContainer" public="false">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id=".service_locator.wnlveDj"/>
+    </service>
+    <service id="locale_aware_listener" class="Symfony\Component\HttpKernel\EventListener\LocaleAwareListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <tag name="container.hot_path"/>
+      <argument type="iterator">
+        <argument type="service" id="slugger"/>
+        <argument type="service" id="translator.default"/>
+      </argument>
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="container.env_var_processor" class="Symfony\Component\DependencyInjection\EnvVarProcessor" public="false">
+      <tag name="container.env_var_processor"/>
+      <argument type="service" id="service_container"/>
+      <argument type="tagged_iterator" tag="container.env_var_loader"/>
+    </service>
+    <service id="slugger" class="Symfony\Component\String\Slugger\AsciiSlugger" public="false">
+      <tag name="kernel.locale_aware"/>
+      <argument>en</argument>
+    </service>
+    <service id="fragment.handler" class="Symfony\Component\HttpKernel\DependencyInjection\LazyLoadingFragmentHandler" public="false">
+      <argument type="service" id=".service_locator._cmka45"/>
+      <argument type="service" id="request_stack"/>
+      <argument>true</argument>
+    </service>
+    <service id="fragment.renderer.inline" class="Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer" public="false">
+      <tag name="kernel.fragment_renderer" alias="inline"/>
+      <argument type="service" id="http_kernel"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <call method="setFragmentPath">
+        <argument>/_fragment</argument>
+      </call>
+    </service>
+    <service id=".2_~FKOdZ5q" public="false">
+      <argument type="service" id="request_stack"/>
+      <factory class="Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer" method="getAndCleanOutputBuffer"/>
+    </service>
+    <service id=".1_~FKOdZ5q" public="false">
+      <argument type="service" id="request_stack"/>
+      <argument>true</argument>
+      <factory class="Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer" method="isDebug"/>
+    </service>
+    <service id="error_handler.error_renderer.html" class="Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer">
+      <argument type="service" id=".1_~FKOdZ5q"/>
+      <argument>UTF-8</argument>
+      <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
+      <argument>/app/apps/backoffice/backend</argument>
+      <argument type="service" id=".2_~FKOdZ5q"/>
+      <argument type="service" id="logger" on-invalid="null"/>
+    </service>
+    <service id="console.error_listener" class="Symfony\Component\Console\EventListener\ErrorListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="monolog.logger" channel="console"/>
+      <argument type="service" id="logger" on-invalid="null"/>
+    </service>
+    <service id="console.suggest_missing_package_subscriber" class="Symfony\Bundle\FrameworkBundle\EventListener\SuggestMissingPackageSubscriber" public="false">
+      <tag name="kernel.event_subscriber"/>
+    </service>
+    <service id="console.command.about" class="Symfony\Bundle\FrameworkBundle\Command\AboutCommand" public="false">
+      <tag name="console.command" command="about"/>
+      <call method="setName">
+        <argument>about</argument>
+      </call>
+    </service>
+    <service id="console.command.assets_install" class="Symfony\Bundle\FrameworkBundle\Command\AssetsInstallCommand" public="false">
+      <tag name="console.command" command="assets:install"/>
+      <argument type="service" id="filesystem"/>
+      <argument>/app/apps/backoffice/backend</argument>
+      <call method="setName">
+        <argument>assets:install</argument>
+      </call>
+    </service>
+    <service id="console.command.cache_clear" class="Symfony\Bundle\FrameworkBundle\Command\CacheClearCommand" public="false">
+      <tag name="console.command" command="cache:clear"/>
+      <argument type="service" id="cache_clearer"/>
+      <argument type="service" id="filesystem"/>
+      <call method="setName">
+        <argument>cache:clear</argument>
+      </call>
+    </service>
+    <service id="console.command.cache_pool_clear" class="Symfony\Bundle\FrameworkBundle\Command\CachePoolClearCommand" public="false">
+      <tag name="console.command" command="cache:pool:clear"/>
+      <argument type="service" id="cache.global_clearer"/>
+      <call method="setName">
+        <argument>cache:pool:clear</argument>
+      </call>
+    </service>
+    <service id="console.command.cache_pool_prune" class="Symfony\Bundle\FrameworkBundle\Command\CachePoolPruneCommand" public="false">
+      <tag name="console.command" command="cache:pool:prune"/>
+      <argument type="iterator"/>
+      <call method="setName">
+        <argument>cache:pool:prune</argument>
+      </call>
+    </service>
+    <service id="console.command.cache_pool_delete" class="Symfony\Bundle\FrameworkBundle\Command\CachePoolDeleteCommand" public="false">
+      <tag name="console.command" command="cache:pool:delete"/>
+      <argument type="service" id="cache.global_clearer"/>
+      <call method="setName">
+        <argument>cache:pool:delete</argument>
+      </call>
+    </service>
+    <service id="console.command.cache_pool_list" class="Symfony\Bundle\FrameworkBundle\Command\CachePoolListCommand" public="false">
+      <tag name="console.command" command="cache:pool:list"/>
+      <argument type="collection">
+        <argument>cache.app</argument>
+        <argument>cache.system</argument>
+        <argument>cache.validator</argument>
+        <argument>cache.serializer</argument>
+        <argument>cache.annotations</argument>
+        <argument>cache.property_info</argument>
+        <argument>cache.messenger.restart_workers_signal</argument>
+      </argument>
+      <call method="setName">
+        <argument>cache:pool:list</argument>
+      </call>
+    </service>
+    <service id="console.command.cache_warmup" class="Symfony\Bundle\FrameworkBundle\Command\CacheWarmupCommand" public="false">
+      <tag name="console.command" command="cache:warmup"/>
+      <argument type="service" id="cache_warmer"/>
+      <call method="setName">
+        <argument>cache:warmup</argument>
+      </call>
+    </service>
+    <service id="console.command.config_debug" class="Symfony\Bundle\FrameworkBundle\Command\ConfigDebugCommand" public="false">
+      <tag name="console.command" command="debug:config"/>
+      <call method="setName">
+        <argument>debug:config</argument>
+      </call>
+    </service>
+    <service id="console.command.config_dump_reference" class="Symfony\Bundle\FrameworkBundle\Command\ConfigDumpReferenceCommand" public="false">
+      <tag name="console.command" command="config:dump-reference"/>
+      <call method="setName">
+        <argument>config:dump-reference</argument>
+      </call>
+    </service>
+    <service id="console.command.container_debug" class="Symfony\Bundle\FrameworkBundle\Command\ContainerDebugCommand" public="false">
+      <tag name="console.command" command="debug:container"/>
+      <call method="setName">
+        <argument>debug:container</argument>
+      </call>
+    </service>
+    <service id="console.command.container_lint" class="Symfony\Bundle\FrameworkBundle\Command\ContainerLintCommand" public="false">
+      <tag name="console.command" command="lint:container"/>
+      <call method="setName">
+        <argument>lint:container</argument>
+      </call>
+    </service>
+    <service id="console.command.debug_autowiring" class="Symfony\Bundle\FrameworkBundle\Command\DebugAutowiringCommand" public="false">
+      <tag name="console.command" command="debug:autowiring"/>
+      <argument>null</argument>
+      <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
+      <call method="setName">
+        <argument>debug:autowiring</argument>
+      </call>
+    </service>
+    <service id="console.command.event_dispatcher_debug" class="Symfony\Bundle\FrameworkBundle\Command\EventDispatcherDebugCommand" public="false">
+      <tag name="console.command" command="debug:event-dispatcher"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <call method="setName">
+        <argument>debug:event-dispatcher</argument>
+      </call>
+    </service>
+    <service id="console.command.messenger_consume_messages" class="Symfony\Component\Messenger\Command\ConsumeMessagesCommand" public="false">
+      <tag name="console.command" command="messenger:consume"/>
+      <tag name="monolog.logger" channel="messenger"/>
+      <argument type="service" id="messenger.routable_message_bus"/>
+      <argument type="service" id="messenger.receiver_locator"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="logger" on-invalid="null"/>
+      <argument type="collection"/>
+      <call method="setName">
+        <argument>messenger:consume</argument>
+      </call>
+    </service>
+    <service id="console.command.messenger_setup_transports" class="Symfony\Component\Messenger\Command\SetupTransportsCommand" public="false">
+      <tag name="console.command" command="messenger:setup-transports"/>
+      <argument type="service" id="messenger.receiver_locator"/>
+      <argument type="collection"/>
+      <call method="setName">
+        <argument>messenger:setup-transports</argument>
+      </call>
+    </service>
+    <service id="console.command.messenger_debug" class="Symfony\Component\Messenger\Command\DebugCommand" public="false">
+      <tag name="console.command" command="debug:messenger"/>
+      <argument type="collection">
+        <argument key="messenger.bus.default" type="collection">
+          <argument key="Symfony\Component\Mailer\Messenger\SendEmailMessage" type="collection">
+            <argument type="collection">
+              <argument>mailer.messenger.message_handler</argument>
+              <argument type="collection"/>
+            </argument>
+          </argument>
+          <argument key="Symfony\Component\Notifier\Message\ChatMessage" type="collection">
+            <argument type="collection">
+              <argument>chatter.messenger.chat_handler</argument>
+              <argument type="collection"/>
+            </argument>
+          </argument>
+          <argument key="Symfony\Component\Notifier\Message\SmsMessage" type="collection">
+            <argument type="collection">
+              <argument>texter.messenger.sms_handler</argument>
+              <argument type="collection"/>
+            </argument>
+          </argument>
+        </argument>
+      </argument>
+      <call method="setName">
+        <argument>debug:messenger</argument>
+      </call>
+    </service>
+    <service id="console.command.messenger_stop_workers" class="Symfony\Component\Messenger\Command\StopWorkersCommand" public="false">
+      <tag name="console.command" command="messenger:stop-workers"/>
+      <argument type="service" id="cache.messenger.restart_workers_signal"/>
+      <call method="setName">
+        <argument>messenger:stop-workers</argument>
+      </call>
+    </service>
+    <service id="console.command.router_debug" class="Symfony\Bundle\FrameworkBundle\Command\RouterDebugCommand" public="false">
+      <tag name="console.command" command="debug:router"/>
+      <argument type="service" id="router.default"/>
+      <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
+      <call method="setName">
+        <argument>debug:router</argument>
+      </call>
+    </service>
+    <service id="console.command.router_match" class="Symfony\Bundle\FrameworkBundle\Command\RouterMatchCommand" public="false">
+      <tag name="console.command" command="router:match"/>
+      <argument type="service" id="router.default"/>
+      <call method="setName">
+        <argument>router:match</argument>
+      </call>
+    </service>
+    <service id="console.command.translation_debug" class="Symfony\Bundle\FrameworkBundle\Command\TranslationDebugCommand" public="false">
+      <tag name="console.command" command="debug:translation"/>
+      <argument type="service" id="translator.default"/>
+      <argument type="service" id="translation.reader"/>
+      <argument type="service" id="translation.extractor"/>
+      <argument>/app/apps/backoffice/backend/translations</argument>
+      <argument></argument>
+      <argument type="collection">
+        <argument>/app/vendor/symfony/validator/Resources/translations</argument>
+        <argument>/app/vendor/symfony/form/Resources/translations</argument>
+        <argument>/app/vendor/symfony/security-core/Resources/translations</argument>
+      </argument>
+      <argument type="collection"/>
+      <call method="setName">
+        <argument>debug:translation</argument>
+      </call>
+    </service>
+    <service id="console.command.translation_update" class="Symfony\Bundle\FrameworkBundle\Command\TranslationUpdateCommand" public="false">
+      <tag name="console.command" command="translation:update"/>
+      <argument type="service" id="translation.writer"/>
+      <argument type="service" id="translation.reader"/>
+      <argument type="service" id="translation.extractor"/>
+      <argument>en</argument>
+      <argument>/app/apps/backoffice/backend/translations</argument>
+      <argument></argument>
+      <argument type="collection">
+        <argument>/app/vendor/symfony/validator/Resources/translations</argument>
+        <argument>/app/vendor/symfony/form/Resources/translations</argument>
+        <argument>/app/vendor/symfony/security-core/Resources/translations</argument>
+      </argument>
+      <argument type="collection"/>
+      <call method="setName">
+        <argument>translation:update</argument>
+      </call>
+    </service>
+    <service id="console.command.xliff_lint" class="Symfony\Bundle\FrameworkBundle\Command\XliffLintCommand" public="false">
+      <tag name="console.command" command="lint:xliff"/>
+      <call method="setName">
+        <argument>lint:xliff</argument>
+      </call>
+    </service>
+    <service id="console.command.yaml_lint" class="Symfony\Bundle\FrameworkBundle\Command\YamlLintCommand" public="false">
+      <tag name="console.command" command="lint:yaml"/>
+      <call method="setName">
+        <argument>lint:yaml</argument>
+      </call>
+    </service>
+    <service id="console.command.form_debug" class="Symfony\Component\Form\Command\DebugCommand" public="false">
+      <tag name="console.command" command="debug:form"/>
+      <argument type="service" id="form.registry"/>
+      <argument type="collection">
+        <argument>Symfony\Component\Form\Extension\Core\Type</argument>
+      </argument>
+      <argument type="collection">
+        <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
+        <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
+        <argument>Symfony\Component\Form\Extension\Core\Type\FileType</argument>
+      </argument>
+      <argument type="collection">
+        <argument>Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension</argument>
+        <argument>Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension</argument>
+        <argument>Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension</argument>
+        <argument>Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension</argument>
+        <argument>Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension</argument>
+        <argument>Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension</argument>
+        <argument>Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension</argument>
+      </argument>
+      <argument type="collection">
+        <argument>Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser</argument>
+      </argument>
+      <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
+      <call method="setName">
+        <argument>debug:form</argument>
+      </call>
+    </service>
+    <service id="console.command.secrets_set" class="Symfony\Bundle\FrameworkBundle\Command\SecretsSetCommand" public="false">
+      <tag name="console.command" command="secrets:set"/>
+      <argument type="service" id="secrets.vault"/>
+      <argument type="service" id="secrets.local_vault" on-invalid="ignore"/>
+      <call method="setName">
+        <argument>secrets:set</argument>
+      </call>
+    </service>
+    <service id="console.command.secrets_remove" class="Symfony\Bundle\FrameworkBundle\Command\SecretsRemoveCommand" public="false">
+      <tag name="console.command" command="secrets:remove"/>
+      <argument type="service" id="secrets.vault"/>
+      <argument type="service" id="secrets.local_vault" on-invalid="ignore"/>
+      <call method="setName">
+        <argument>secrets:remove</argument>
+      </call>
+    </service>
+    <service id="console.command.secrets_generate_key" class="Symfony\Bundle\FrameworkBundle\Command\SecretsGenerateKeysCommand" public="false">
+      <tag name="console.command" command="secrets:generate-keys"/>
+      <argument type="service" id="secrets.vault"/>
+      <argument type="service" id="secrets.local_vault" on-invalid="ignore"/>
+      <call method="setName">
+        <argument>secrets:generate-keys</argument>
+      </call>
+    </service>
+    <service id="console.command.secrets_list" class="Symfony\Bundle\FrameworkBundle\Command\SecretsListCommand" public="false">
+      <tag name="console.command" command="secrets:list"/>
+      <argument type="service" id="secrets.vault"/>
+      <argument type="service" id="secrets.local_vault" on-invalid="ignore"/>
+      <call method="setName">
+        <argument>secrets:list</argument>
+      </call>
+    </service>
+    <service id="console.command.secrets_decrypt_to_local" class="Symfony\Bundle\FrameworkBundle\Command\SecretsDecryptToLocalCommand" public="false">
+      <tag name="console.command" command="secrets:decrypt-to-local"/>
+      <argument type="service" id="secrets.vault"/>
+      <argument type="service" id="secrets.local_vault" on-invalid="ignore"/>
+      <call method="setName">
+        <argument>secrets:decrypt-to-local</argument>
+      </call>
+    </service>
+    <service id="console.command.secrets_encrypt_from_local" class="Symfony\Bundle\FrameworkBundle\Command\SecretsEncryptFromLocalCommand" public="false">
+      <tag name="console.command" command="secrets:encrypt-from-local"/>
+      <argument type="service" id="secrets.vault"/>
+      <argument type="service" id="secrets.local_vault" on-invalid="ignore"/>
+      <call method="setName">
+        <argument>secrets:encrypt-from-local</argument>
+      </call>
+    </service>
+    <service id="cache.app" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="true">
+      <tag name="cache.pool"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument>Wg6xeJ1V6f</argument>
+      <argument>0</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/pools</argument>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.app.taggable" class="Symfony\Component\Cache\Adapter\TagAwareAdapter" public="false">
+      <argument type="service" id="cache.app"/>
+    </service>
+    <service id="cache.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
+      <tag name="cache.pool"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument>pj1e0veVP1</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/pools</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
+    </service>
+    <service id="cache.validator" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
+      <tag name="cache.pool"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument>T+-g4Zj2I4</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/pools</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
+    </service>
+    <service id="cache.serializer" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
+      <tag name="cache.pool"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument>mMMoDnWep2</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/pools</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
+    </service>
+    <service id="cache.annotations" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
+      <tag name="cache.pool"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument>OrrPgReQAA</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/pools</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
+    </service>
+    <service id="cache.property_info" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
+      <tag name="cache.pool"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument>Z+vC1J7ws9</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/pools</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
+    </service>
+    <service id="cache.messenger.restart_workers_signal" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="false">
+      <tag name="cache.pool"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument>36x+vfmGCQ</argument>
+      <argument>0</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/pools</argument>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.adapter.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false" abstract="true">
+      <tag name="cache.pool" clearer="cache.system_clearer" reset="reset"/>
+      <tag name="monolog.logger" channel="cache"/>
+      <argument></argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/pools</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
+    </service>
+    <service id="cache.adapter.apcu" class="Symfony\Component\Cache\Adapter\ApcuAdapter" public="false" abstract="true">
+      <tag name="cache.pool" clearer="cache.default_clearer" reset="reset"/>
+      <tag name="monolog.logger" channel="cache"/>
+      <argument></argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.adapter.doctrine" class="Symfony\Component\Cache\Adapter\DoctrineAdapter" public="false" abstract="true">
+      <tag name="cache.pool" provider="cache.default_doctrine_provider" clearer="cache.default_clearer" reset="reset"/>
+      <tag name="monolog.logger" channel="cache"/>
+      <argument></argument>
+      <argument></argument>
+      <argument>0</argument>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.adapter.filesystem" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="false" abstract="true">
+      <tag name="cache.pool" clearer="cache.default_clearer" reset="reset"/>
+      <tag name="monolog.logger" channel="cache"/>
+      <argument></argument>
+      <argument>0</argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/pools</argument>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.adapter.psr6" class="Symfony\Component\Cache\Adapter\ProxyAdapter" public="false" abstract="true">
+      <tag name="cache.pool" provider="cache.default_psr6_provider" clearer="cache.default_clearer" reset="reset"/>
+      <argument></argument>
+      <argument></argument>
+      <argument>0</argument>
+    </service>
+    <service id="cache.adapter.redis" class="Symfony\Component\Cache\Adapter\RedisAdapter" public="false" abstract="true">
+      <tag name="cache.pool" provider="cache.default_redis_provider" clearer="cache.default_clearer" reset="reset"/>
+      <tag name="monolog.logger" channel="cache"/>
+      <argument></argument>
+      <argument></argument>
+      <argument>0</argument>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.adapter.memcached" class="Symfony\Component\Cache\Adapter\MemcachedAdapter" public="false" abstract="true">
+      <tag name="cache.pool" provider="cache.default_memcached_provider" clearer="cache.default_clearer" reset="reset"/>
+      <tag name="monolog.logger" channel="cache"/>
+      <argument></argument>
+      <argument></argument>
+      <argument>0</argument>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.adapter.pdo" class="Symfony\Component\Cache\Adapter\PdoAdapter" public="false" abstract="true">
+      <tag name="cache.pool" provider="cache.default_pdo_provider" clearer="cache.default_clearer" reset="reset"/>
+      <tag name="monolog.logger" channel="cache"/>
+      <argument></argument>
+      <argument></argument>
+      <argument>0</argument>
+      <argument type="collection"/>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.adapter.array" class="Symfony\Component\Cache\Adapter\ArrayAdapter" public="false" abstract="true">
+      <tag name="cache.pool" clearer="cache.default_clearer" reset="reset"/>
+      <tag name="monolog.logger" channel="cache"/>
+      <argument>0</argument>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.default_marshaller" class="Symfony\Component\Cache\Marshaller\DefaultMarshaller" public="false">
+      <argument>null</argument>
+    </service>
+    <service id="cache.default_clearer" class="Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer" public="false">
+      <tag name="cache.pool.clearer"/>
+      <argument type="collection">
+        <argument key="cache.app" type="service" id="cache.app" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.messenger.restart_workers_signal" type="service" id="cache.messenger.restart_workers_signal" on-invalid="ignore_uninitialized"/>
+      </argument>
+    </service>
+    <service id="cache.system_clearer" class="Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer" public="true">
+      <tag name="cache.pool.clearer"/>
+      <tag name="kernel.cache_clearer"/>
+      <argument type="collection">
+        <argument key="cache.system" type="service" id="cache.system" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.validator" type="service" id="cache.validator" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.serializer" type="service" id="cache.serializer" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.annotations" type="service" id="cache.annotations" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.property_info" type="service" id="cache.property_info" on-invalid="ignore_uninitialized"/>
+      </argument>
+    </service>
+    <service id="cache.global_clearer" class="Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer" public="true">
+      <tag name="cache.pool.clearer"/>
+      <argument type="collection">
+        <argument key="cache.app" type="service" id="cache.app" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.system" type="service" id="cache.system" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.validator" type="service" id="cache.validator" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.serializer" type="service" id="cache.serializer" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.annotations" type="service" id="cache.annotations" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.property_info" type="service" id="cache.property_info" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.messenger.restart_workers_signal" type="service" id="cache.messenger.restart_workers_signal" on-invalid="ignore_uninitialized"/>
+      </argument>
+    </service>
+    <service id="identity_translator" class="Symfony\Component\Translation\IdentityTranslator" public="false"/>
+    <service id=".cache_connection.GD_MSZC" class="Symfony\Component\Cache\Adapter\AbstractAdapter" public="false">
+      <argument>redis://localhost</argument>
+      <argument type="collection">
+        <argument key="lazy">true</argument>
+      </argument>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createConnection"/>
+    </service>
+    <service id=".cache_connection.JKE6keX" class="Symfony\Component\Cache\Adapter\AbstractAdapter" public="false">
+      <argument>memcached://localhost</argument>
+      <argument type="collection">
+        <argument key="lazy">true</argument>
+      </argument>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createConnection"/>
+    </service>
+    <service id="cache.property_access" class="Symfony\Component\Cache\Adapter\ArrayAdapter" public="false">
+      <argument>0</argument>
+      <argument>false</argument>
+    </service>
+    <service id=".1_NativeFileSessionHandler~O_w4jVI" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler" public="false">
+      <argument>/app/apps/backoffice/backend/var/cache/dev/sessions</argument>
+    </service>
+    <service id="session" class="Symfony\Component\HttpFoundation\Session\Session" public="true">
+      <argument type="service" id="session.storage.native"/>
+    </service>
+    <service id="session.storage.metadata_bag" class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag" public="false">
+      <argument>_sf2_meta</argument>
+      <argument>0</argument>
+    </service>
+    <service id="session.storage.native" class="Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage" public="false">
+      <argument>%session.storage.options%</argument>
+      <argument>null</argument>
+      <argument type="service" id="session.storage.metadata_bag"/>
+    </service>
+    <service id="session.storage.php_bridge" class="Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage" public="false">
+      <argument>null</argument>
+      <argument type="service" id="session.storage.metadata_bag"/>
+    </service>
+    <service id="session.flash_bag" class="Symfony\Component\HttpFoundation\Session\Flash\FlashBag" public="false">
+      <factory service="session" method="getFlashBag"/>
+    </service>
+    <service id="session.attribute_bag" class="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag" public="false">
+      <argument>attributes</argument>
+      <factory service="session" method="getBag"/>
+    </service>
+    <service id="session.storage.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage" public="false">
+      <argument>/app/apps/backoffice/backend/var/cache/dev/sessions</argument>
+      <argument>MOCKSESSID</argument>
+      <argument type="service" id="session.storage.metadata_bag"/>
+    </service>
+    <service id="session.handler.native_file" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler" public="false">
+      <argument type="service" id=".1_NativeFileSessionHandler~O_w4jVI"/>
+    </service>
+    <service id="session.abstract_handler" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler" public="false">
+      <argument></argument>
+      <factory class="Symfony\Component\HttpFoundation\Session\Storage\Handler\SessionHandlerFactory" method="createHandler"/>
+    </service>
+    <service id="session_listener" class="Symfony\Component\HttpKernel\EventListener\SessionListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <tag name="container.hot_path"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id=".service_locator.Bppmeg3"/>
+    </service>
+    <service id="security.csrf.token_generator" class="Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator" public="false"/>
+    <service id="security.csrf.token_storage" class="Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage" public="false">
+      <argument type="service" id="session"/>
+    </service>
+    <service id="security.csrf.token_manager" class="Symfony\Component\Security\Csrf\CsrfTokenManager" public="true">
+      <argument type="service" id="security.csrf.token_generator"/>
+      <argument type="service" id="security.csrf.token_storage"/>
+      <argument type="service" id="request_stack" on-invalid="ignore"/>
+    </service>
+    <service id="twig.runtime.security_csrf" class="Symfony\Bridge\Twig\Extension\CsrfRuntime" public="false">
+      <tag name="twig.runtime"/>
+      <argument type="service" id="security.csrf.token_manager"/>
+    </service>
+    <service id="twig.extension.security_csrf" class="Symfony\Bridge\Twig\Extension\CsrfExtension" public="false">
+      <tag name="twig.extension"/>
+    </service>
+    <service id="form.resolved_type_factory" class="Symfony\Component\Form\ResolvedFormTypeFactory" public="false"/>
+    <service id="form.registry" class="Symfony\Component\Form\FormRegistry" public="false">
+      <argument type="collection">
+        <argument type="service" id="form.extension"/>
+      </argument>
+      <argument type="service" id="form.resolved_type_factory"/>
+    </service>
+    <service id="form.factory" class="Symfony\Component\Form\FormFactory" public="true">
+      <argument type="service" id="form.registry"/>
+    </service>
+    <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
+      <argument type="service" id=".service_locator.dY5cnw3"/>
+      <argument type="collection">
+        <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
+          <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
+          <argument type="service" id="form.type_extension.form.http_foundation"/>
+          <argument type="service" id="form.type_extension.form.validator"/>
+          <argument type="service" id="form.type_extension.upload.validator"/>
+          <argument type="service" id="form.type_extension.csrf"/>
+        </argument>
+        <argument key="Symfony\Component\Form\Extension\Core\Type\RepeatedType" type="iterator">
+          <argument type="service" id="form.type_extension.repeated.validator"/>
+        </argument>
+        <argument key="Symfony\Component\Form\Extension\Core\Type\SubmitType" type="iterator">
+          <argument type="service" id="form.type_extension.submit.validator"/>
+        </argument>
+      </argument>
+      <argument type="iterator">
+        <argument type="service" id="form.type_guesser.validator"/>
+      </argument>
+    </service>
+    <service id="form.type_guesser.validator" class="Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser" public="false">
+      <tag name="form.type_guesser"/>
+      <argument type="service" id="validator"/>
+    </service>
+    <service id="form.choice_list_factory.default" class="Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory" public="false"/>
+    <service id="form.choice_list_factory.property_access" class="Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator" public="false">
+      <argument type="service" id="form.choice_list_factory.default"/>
+      <argument type="service" id="property_accessor"/>
+    </service>
+    <service id="form.choice_list_factory.cached" class="Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator" public="false">
+      <tag name="kernel.reset" method="reset"/>
+      <argument type="service" id="form.choice_list_factory.property_access"/>
+    </service>
+    <service id="form.type.form" class="Symfony\Component\Form\Extension\Core\Type\FormType" public="false">
+      <tag name="form.type"/>
+      <argument type="service" id="property_accessor"/>
+    </service>
+    <service id="form.type.choice" class="Symfony\Component\Form\Extension\Core\Type\ChoiceType" public="false">
+      <tag name="form.type"/>
+      <argument type="service" id="form.choice_list_factory.cached"/>
+    </service>
+    <service id="form.type.file" class="Symfony\Component\Form\Extension\Core\Type\FileType" public="true">
+      <tag name="form.type"/>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
+    </service>
+    <service id="form.type_extension.form.transformation_failure_handling" class="Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension" public="false">
+      <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\FormType" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
+    </service>
+    <service id="form.type_extension.form.http_foundation" class="Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension" public="false">
+      <tag name="form.type_extension"/>
+      <argument type="service" id="form.type_extension.form.request_handler"/>
+    </service>
+    <service id="form.type_extension.form.request_handler" class="Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler" public="false">
+      <argument type="service" id="form.server_params"/>
+    </service>
+    <service id="form.server_params" class="Symfony\Component\Form\Util\ServerParams" public="false">
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="form.type_extension.form.validator" class="Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension" public="false">
+      <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\FormType" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
+      <argument type="service" id="validator"/>
+    </service>
+    <service id="form.type_extension.repeated.validator" class="Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension" public="false">
+      <tag name="form.type_extension"/>
+    </service>
+    <service id="form.type_extension.submit.validator" class="Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension" public="false">
+      <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\SubmitType" extended-type="Symfony\Component\Form\Extension\Core\Type\SubmitType"/>
+    </service>
+    <service id="form.type_extension.upload.validator" class="Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension" public="false">
+      <tag name="form.type_extension"/>
+      <argument type="service" id="translator.default"/>
+      <argument>validators</argument>
+    </service>
+    <service id="form.type_extension.csrf" class="Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension" public="false">
+      <tag name="form.type_extension"/>
+      <argument type="service" id="security.csrf.token_manager"/>
+      <argument>true</argument>
+      <argument>_token</argument>
+      <argument type="service" id="translator.default" on-invalid="null"/>
+      <argument>validators</argument>
+      <argument type="service" id="form.server_params"/>
+    </service>
+    <service id="assets.packages" class="Symfony\Component\Asset\Packages" public="false">
+      <argument type="service" id="assets._default_package"/>
+      <argument type="collection"/>
+    </service>
+    <service id="assets.empty_package" class="Symfony\Component\Asset\Package" public="false">
+      <argument type="service" id="assets.empty_version_strategy"/>
+    </service>
+    <service id="assets.context" class="Symfony\Component\Asset\Context\RequestStackContext" public="false">
+      <argument type="service" id="request_stack"/>
+      <argument></argument>
+      <argument>false</argument>
+    </service>
+    <service id="assets.path_package" class="Symfony\Component\Asset\PathPackage" public="false" abstract="true">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="assets.context"/>
+    </service>
+    <service id="assets.url_package" class="Symfony\Component\Asset\UrlPackage" public="false" abstract="true">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="assets.context"/>
+    </service>
+    <service id="assets.static_version_strategy" class="Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy" public="false" abstract="true">
+      <argument></argument>
+      <argument></argument>
+    </service>
+    <service id="assets.empty_version_strategy" class="Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy" public="false"/>
+    <service id="assets.json_manifest_version_strategy" class="Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy" public="false" abstract="true">
+      <argument></argument>
+    </service>
+    <service id="assets._default_package" class="Symfony\Component\Asset\PathPackage" public="false">
+      <argument></argument>
+      <argument type="service" id="assets.empty_version_strategy"/>
+      <argument type="service" id="assets.context"/>
+    </service>
+    <service id="messenger.senders_locator" class="Symfony\Component\Messenger\Transport\Sender\SendersLocator" public="false">
+      <argument type="collection"/>
+      <argument type="service" id=".service_locator.I3K77mT"/>
+    </service>
+    <service id="messenger.middleware.send_message" class="Symfony\Component\Messenger\Middleware\SendMessageMiddleware" public="false">
+      <tag name="monolog.logger" channel="messenger"/>
+      <argument type="service" id="messenger.senders_locator"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="messenger.transport.native_php_serializer" class="Symfony\Component\Messenger\Transport\Serialization\PhpSerializer" public="false"/>
+    <service id="messenger.middleware.handle_message" class="Symfony\Component\Messenger\Middleware\HandleMessageMiddleware" public="false" abstract="true">
+      <tag name="monolog.logger" channel="messenger"/>
+      <argument></argument>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="messenger.middleware.add_bus_name_stamp_middleware" class="Symfony\Component\Messenger\Middleware\AddBusNameStampMiddleware" public="false" abstract="true"/>
+    <service id="messenger.middleware.dispatch_after_current_bus" class="Symfony\Component\Messenger\Middleware\DispatchAfterCurrentBusMiddleware" public="false"/>
+    <service id="messenger.middleware.validation" class="Symfony\Component\Messenger\Middleware\ValidationMiddleware" public="false">
+      <argument type="service" id="validator"/>
+    </service>
+    <service id="messenger.middleware.reject_redelivered_message_middleware" class="Symfony\Component\Messenger\Middleware\RejectRedeliveredMessageMiddleware" public="false"/>
+    <service id="messenger.middleware.failed_message_processing_middleware" class="Symfony\Component\Messenger\Middleware\FailedMessageProcessingMiddleware" public="false"/>
+    <service id="messenger.middleware.traceable" class="Symfony\Component\Messenger\Middleware\TraceableMiddleware" public="false" abstract="true">
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id="messenger.receiver_locator" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id="messenger.transport_factory" class="Symfony\Component\Messenger\Transport\TransportFactory" public="false">
+      <argument type="tagged_iterator" tag="messenger.transport_factory"/>
+    </service>
+    <service id="messenger.transport.sync.factory" class="Symfony\Component\Messenger\Transport\Sync\SyncTransportFactory" public="false">
+      <tag name="messenger.transport_factory"/>
+      <argument type="service" id="messenger.routable_message_bus"/>
+    </service>
+    <service id="messenger.transport.in_memory.factory" class="Symfony\Component\Messenger\Transport\InMemoryTransportFactory" public="false">
+      <tag name="messenger.transport_factory"/>
+      <tag name="kernel.reset" method="reset"/>
+    </service>
+    <service id="messenger.retry_strategy_locator" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id="messenger.retry.abstract_multiplier_retry_strategy" class="Symfony\Component\Messenger\Retry\MultiplierRetryStrategy" public="false" abstract="true">
+      <argument></argument>
+      <argument></argument>
+      <argument></argument>
+      <argument></argument>
+    </service>
+    <service id="messenger.retry.send_failed_message_for_retry_listener" class="Symfony\Component\Messenger\EventListener\SendFailedMessageForRetryListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="monolog.logger" channel="messenger"/>
+      <argument type="service" id=".service_locator.I3K77mT"/>
+      <argument type="service" id="messenger.retry_strategy_locator"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="messenger.listener.dispatch_pcntl_signal_listener" class="Symfony\Component\Messenger\EventListener\DispatchPcntlSignalListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+    </service>
+    <service id="messenger.listener.stop_worker_on_restart_signal_listener" class="Symfony\Component\Messenger\EventListener\StopWorkerOnRestartSignalListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="monolog.logger" channel="messenger"/>
+      <argument type="service" id="cache.messenger.restart_workers_signal"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="messenger.listener.stop_worker_on_sigterm_signal_listener" class="Symfony\Component\Messenger\EventListener\StopWorkerOnSigtermSignalListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+    </service>
+    <service id="messenger.routable_message_bus" class="Symfony\Component\Messenger\RoutableMessageBus" public="false">
+      <argument type="service" id=".service_locator.CCTmIC0"/>
+      <argument type="service" id="messenger.bus.default"/>
+    </service>
+    <service id="messenger.bus.default" class="Symfony\Component\Messenger\MessageBus">
+      <tag name="messenger.bus"/>
+      <argument type="iterator">
+        <argument type="service" id="messenger.bus.default.middleware.traceable"/>
+        <argument type="service" id="messenger.bus.default.middleware.add_bus_name_stamp_middleware"/>
+        <argument type="service" id="messenger.middleware.reject_redelivered_message_middleware"/>
+        <argument type="service" id="messenger.middleware.dispatch_after_current_bus"/>
+        <argument type="service" id="messenger.middleware.failed_message_processing_middleware"/>
+        <argument type="service" id="messenger.middleware.send_message"/>
+        <argument type="service" id="messenger.bus.default.middleware.handle_message"/>
+      </argument>
+    </service>
+    <service id=".service_locator.I3K77mT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id="http_client" class="Symfony\Contracts\HttpClient\HttpClientInterface">
+      <tag name="monolog.logger" channel="http_client"/>
+      <tag name="http_client.client"/>
+      <argument type="collection"/>
+      <argument>6</argument>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+      <factory class="Symfony\Component\HttpClient\HttpClient" method="create"/>
+    </service>
+    <service id="mailer.mailer" class="Symfony\Component\Mailer\Mailer">
+      <argument type="service" id="mailer.transports"/>
+      <argument type="service" id="messenger.bus.default" on-invalid="ignore"/>
+      <argument type="service" id="debug.event_dispatcher" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transports" class="Symfony\Component\Mailer\Transport\Transports">
+      <argument type="collection">
+        <argument key="main">smtp://null</argument>
+      </argument>
+      <factory service="mailer.transport_factory" method="fromStrings"/>
+    </service>
+    <service id="mailer.transport_factory" class="Symfony\Component\Mailer\Transport">
+      <argument type="tagged_iterator" tag="mailer.transport_factory"/>
+    </service>
+    <service id="mailer.default_transport" class="Symfony\Component\Mailer\Transport\TransportInterface">
+      <argument>smtp://null</argument>
+      <factory service="mailer.transport_factory" method="fromString"/>
+    </service>
+    <service id="mailer.messenger.message_handler" class="Symfony\Component\Mailer\Messenger\MessageHandler">
+      <tag name="messenger.message_handler"/>
+      <argument type="service" id="mailer.transports"/>
+    </service>
+    <service id="mailer.envelope_listener" class="Symfony\Component\Mailer\EventListener\EnvelopeListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument>null</argument>
+      <argument>null</argument>
+    </service>
+    <service id="mailer.logger_message_listener" class="Symfony\Component\Mailer\EventListener\MessageLoggerListener">
+      <tag name="kernel.event_subscriber"/>
+    </service>
+    <service id="mailer.transport_factory.abstract" class="Symfony\Component\Mailer\Transport\AbstractTransportFactory" abstract="true">
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="http_client" on-invalid="ignore"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transport_factory.null" class="Symfony\Component\Mailer\Transport\NullTransportFactory">
+      <tag name="mailer.transport_factory"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="http_client" on-invalid="ignore"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transport_factory.sendmail" class="Symfony\Component\Mailer\Transport\SendmailTransportFactory">
+      <tag name="mailer.transport_factory"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="http_client" on-invalid="ignore"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transport_factory.smtp" class="Symfony\Component\Mailer\Transport\Smtp\EsmtpTransportFactory">
+      <tag name="mailer.transport_factory" priority="-100"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="http_client" on-invalid="ignore"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="notifier" class="Symfony\Component\Notifier\Notifier">
+      <argument type="service" id=".service_locator.saJSzyL"/>
+      <argument type="service" id="notifier.channel_policy" on-invalid="ignore"/>
+    </service>
+    <service id="notifier.channel_policy" class="Symfony\Component\Notifier\Channel\ChannelPolicy">
+      <argument type="collection"/>
+    </service>
+    <service id="notifier.channel.browser" class="Symfony\Component\Notifier\Channel\BrowserChannel">
+      <tag name="notifier.channel" channel="browser"/>
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="notifier.channel.chat" class="Symfony\Component\Notifier\Channel\ChatChannel">
+      <tag name="notifier.channel" channel="chat"/>
+      <argument>null</argument>
+      <argument type="service" id="messenger.bus.default" on-invalid="ignore"/>
+    </service>
+    <service id="notifier.channel.sms" class="Symfony\Component\Notifier\Channel\SmsChannel">
+      <tag name="notifier.channel" channel="sms"/>
+      <argument>null</argument>
+      <argument type="service" id="messenger.bus.default" on-invalid="ignore"/>
+    </service>
+    <service id="notifier.channel.email" class="Symfony\Component\Notifier\Channel\EmailChannel">
+      <tag name="notifier.channel" channel="email"/>
+      <argument>null</argument>
+      <argument type="service" id="messenger.bus.default" on-invalid="ignore"/>
+      <argument>null</argument>
+    </service>
+    <service id="notifier.monolog_handler" class="Symfony\Bridge\Monolog\Handler\NotifierHandler">
+      <argument type="service" id="notifier"/>
+    </service>
+    <service id="notifier.failed_message_listener" class="Symfony\Component\Notifier\EventListener\SendFailedMessageToNotifierListener">
+      <argument type="service" id="notifier"/>
+    </service>
+    <service id="chatter.transports" class="Symfony\Component\Notifier\Transport\Transports">
+      <argument type="collection"/>
+      <factory service="chatter.transport_factory" method="fromStrings"/>
+    </service>
+    <service id="chatter.transport_factory" class="Symfony\Component\Notifier\Transport">
+      <argument type="tagged_iterator" tag="chatter.transport_factory"/>
+    </service>
+    <service id="chatter.messenger.chat_handler" class="Symfony\Component\Notifier\Messenger\MessageHandler">
+      <tag name="messenger.message_handler" handles="Symfony\Component\Notifier\Message\ChatMessage"/>
+      <argument type="service" id="chatter.transports"/>
+    </service>
+    <service id="texter.transports" class="Symfony\Component\Notifier\Transport\Transports">
+      <argument type="collection"/>
+      <factory service="texter.transport_factory" method="fromStrings"/>
+    </service>
+    <service id="texter.transport_factory" class="Symfony\Component\Notifier\Transport">
+      <argument type="tagged_iterator" tag="texter.transport_factory"/>
+    </service>
+    <service id="texter.messenger.sms_handler" class="Symfony\Component\Notifier\Messenger\MessageHandler">
+      <tag name="messenger.message_handler" handles="Symfony\Component\Notifier\Message\SmsMessage"/>
+      <argument type="service" id="texter.transports"/>
+    </service>
+    <service id="notifier.transport_factory.abstract" class="Symfony\Component\Notifier\Transport\AbstractTransportFactory" abstract="true">
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="http_client" on-invalid="ignore"/>
+    </service>
+    <service id="notifier.transport_factory.null" class="Symfony\Component\Notifier\Transport\NullTransportFactory">
+      <tag name="chatter.transport_factory"/>
+      <tag name="texter.transport_factory"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="http_client" on-invalid="ignore"/>
+    </service>
+    <service id="validator" class="Symfony\Component\Validator\Validator\ValidatorInterface" public="true">
+      <factory service="validator.builder" method="getValidator"/>
+    </service>
+    <service id="validator.builder" class="Symfony\Component\Validator\ValidatorBuilder" public="false">
+      <call method="setConstraintValidatorFactory">
+        <argument type="service" id="validator.validator_factory"/>
+      </call>
+      <call method="setTranslator">
+        <argument type="service" id="translator.default" on-invalid="ignore"/>
+      </call>
+      <call method="setTranslationDomain">
+        <argument>validators</argument>
+      </call>
+      <call method="addXmlMappings">
+        <argument type="collection">
+          <argument>/app/vendor/symfony/form/Resources/config/validation.xml</argument>
+        </argument>
+      </call>
+      <call method="enableAnnotationMapping">
+        <argument type="service" id="annotations.cached_reader"/>
+      </call>
+      <call method="addMethodMapping">
+        <argument>loadValidatorMetadata</argument>
+      </call>
+      <call method="addObjectInitializers">
+        <argument type="collection"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="validator.property_info_loader"/>
+      </call>
+      <factory class="Symfony\Component\Validator\Validation" method="createValidatorBuilder"/>
+    </service>
+    <service id="validator.mapping.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer" public="false">
+      <tag name="kernel.cache_warmer"/>
+      <argument type="service" id="validator.builder"/>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/validation.php</argument>
+    </service>
+    <service id="validator.mapping.cache.adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" public="false">
+      <argument>/app/apps/backoffice/backend/var/cache/dev/validation.php</argument>
+      <argument type="service" id="cache.validator"/>
+      <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
+    </service>
+    <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory" public="false">
+      <argument type="service" id=".service_locator.uAI1P6g"/>
+    </service>
+    <service id="validator.expression" class="Symfony\Component\Validator\Constraints\ExpressionValidator" public="false">
+      <tag name="validator.constraint_validator" alias="validator.expression"/>
+    </service>
+    <service id="validator.email" class="Symfony\Component\Validator\Constraints\EmailValidator" public="false">
+      <tag name="validator.constraint_validator" alias="Symfony\Component\Validator\Constraints\EmailValidator"/>
+      <argument>loose</argument>
+    </service>
+    <service id="validator.not_compromised_password" class="Symfony\Component\Validator\Constraints\NotCompromisedPasswordValidator" public="false">
+      <tag name="validator.constraint_validator" alias="Symfony\Component\Validator\Constraints\NotCompromisedPasswordValidator"/>
+      <argument type="service" id="http_client" on-invalid="null"/>
+      <argument>UTF-8</argument>
+      <argument>true</argument>
+      <argument>null</argument>
+    </service>
+    <service id="validator.property_info_loader" class="Symfony\Component\Validator\Mapping\Loader\PropertyInfoLoader" public="false">
+      <tag name="validator.auto_mapper"/>
+      <argument type="service" id="property_info"/>
+      <argument type="service" id="property_info"/>
+      <argument type="service" id="property_info"/>
+      <argument>null</argument>
+    </service>
+    <service id="translator.default" class="Symfony\Bundle\FrameworkBundle\Translation\Translator" public="false">
+      <tag name="kernel.locale_aware"/>
+      <argument type="service" id=".service_locator.V.o0zE7"/>
+      <argument type="service" id="translator.formatter.default"/>
+      <argument>en</argument>
+      <argument type="collection">
+        <argument key="translation.loader.php" type="collection">
+          <argument>php</argument>
+        </argument>
+        <argument key="translation.loader.yml" type="collection">
+          <argument>yaml</argument>
+          <argument>yml</argument>
+        </argument>
+        <argument key="translation.loader.xliff" type="collection">
+          <argument>xlf</argument>
+          <argument>xliff</argument>
+        </argument>
+        <argument key="translation.loader.po" type="collection">
+          <argument>po</argument>
+        </argument>
+        <argument key="translation.loader.mo" type="collection">
+          <argument>mo</argument>
+        </argument>
+        <argument key="translation.loader.qt" type="collection">
+          <argument>ts</argument>
+        </argument>
+        <argument key="translation.loader.csv" type="collection">
+          <argument>csv</argument>
+        </argument>
+        <argument key="translation.loader.res" type="collection">
+          <argument>res</argument>
+        </argument>
+        <argument key="translation.loader.dat" type="collection">
+          <argument>dat</argument>
+        </argument>
+        <argument key="translation.loader.ini" type="collection">
+          <argument>ini</argument>
+        </argument>
+        <argument key="translation.loader.json" type="collection">
+          <argument>json</argument>
+        </argument>
+      </argument>
+      <argument type="collection">
+        <argument key="cache_dir">/app/apps/backoffice/backend/var/cache/dev/translations</argument>
+        <argument key="debug">true</argument>
+        <argument key="resource_files" type="collection">
+          <argument key="af" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.af.xlf</argument>
+          </argument>
+          <argument key="ar" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.ar.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.ar.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.ar.xlf</argument>
+          </argument>
+          <argument key="az" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.az.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.az.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.az.xlf</argument>
+          </argument>
+          <argument key="be" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.be.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.be.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.be.xlf</argument>
+          </argument>
+          <argument key="bg" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.bg.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.bg.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.bg.xlf</argument>
+          </argument>
+          <argument key="ca" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.ca.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.ca.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.ca.xlf</argument>
+          </argument>
+          <argument key="cs" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.cs.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.cs.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.cs.xlf</argument>
+          </argument>
+          <argument key="cy" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.cy.xlf</argument>
+          </argument>
+          <argument key="da" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.da.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.da.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.da.xlf</argument>
+          </argument>
+          <argument key="de" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.de.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.de.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.de.xlf</argument>
+          </argument>
+          <argument key="el" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.el.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.el.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.el.xlf</argument>
+          </argument>
+          <argument key="en" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.en.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.en.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.en.xlf</argument>
+          </argument>
+          <argument key="es" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.es.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.es.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.es.xlf</argument>
+          </argument>
+          <argument key="et" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.et.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.et.xlf</argument>
+          </argument>
+          <argument key="eu" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.eu.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.eu.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.eu.xlf</argument>
+          </argument>
+          <argument key="fa" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.fa.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.fa.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.fa.xlf</argument>
+          </argument>
+          <argument key="fi" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.fi.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.fi.xlf</argument>
+          </argument>
+          <argument key="fr" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.fr.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.fr.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.fr.xlf</argument>
+          </argument>
+          <argument key="gl" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.gl.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.gl.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.gl.xlf</argument>
+          </argument>
+          <argument key="he" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.he.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.he.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.he.xlf</argument>
+          </argument>
+          <argument key="hr" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.hr.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.hr.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.hr.xlf</argument>
+          </argument>
+          <argument key="hu" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.hu.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.hu.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.hu.xlf</argument>
+          </argument>
+          <argument key="hy" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.hy.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.hy.xlf</argument>
+          </argument>
+          <argument key="id" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.id.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.id.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.id.xlf</argument>
+          </argument>
+          <argument key="it" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.it.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.it.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.it.xlf</argument>
+          </argument>
+          <argument key="ja" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.ja.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.ja.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.ja.xlf</argument>
+          </argument>
+          <argument key="lb" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.lb.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.lb.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.lb.xlf</argument>
+          </argument>
+          <argument key="lt" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.lt.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.lt.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.lt.xlf</argument>
+          </argument>
+          <argument key="lv" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.lv.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.lv.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.lv.xlf</argument>
+          </argument>
+          <argument key="mn" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.mn.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.mn.xlf</argument>
+          </argument>
+          <argument key="nb" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.nb.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.nb.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.nb.xlf</argument>
+          </argument>
+          <argument key="nl" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.nl.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.nl.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.nl.xlf</argument>
+          </argument>
+          <argument key="nn" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.nn.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.nn.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.nn.xlf</argument>
+          </argument>
+          <argument key="no" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.no.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.no.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.no.xlf</argument>
+          </argument>
+          <argument key="pl" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.pl.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.pl.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.pl.xlf</argument>
+          </argument>
+          <argument key="pt" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.pt.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.pt.xlf</argument>
+          </argument>
+          <argument key="pt_BR" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.pt_BR.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.pt_BR.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.pt_BR.xlf</argument>
+          </argument>
+          <argument key="ro" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.ro.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.ro.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.ro.xlf</argument>
+          </argument>
+          <argument key="ru" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.ru.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.ru.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.ru.xlf</argument>
+          </argument>
+          <argument key="sk" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.sk.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.sk.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.sk.xlf</argument>
+          </argument>
+          <argument key="sl" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.sl.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.sl.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.sl.xlf</argument>
+          </argument>
+          <argument key="sq" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.sq.xlf</argument>
+          </argument>
+          <argument key="sr_Cyrl" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.sr_Cyrl.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.sr_Cyrl.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.sr_Cyrl.xlf</argument>
+          </argument>
+          <argument key="sr_Latn" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.sr_Latn.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.sr_Latn.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.sr_Latn.xlf</argument>
+          </argument>
+          <argument key="sv" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.sv.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.sv.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.sv.xlf</argument>
+          </argument>
+          <argument key="th" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.th.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.th.xlf</argument>
+          </argument>
+          <argument key="tl" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.tl.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.tl.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.tl.xlf</argument>
+          </argument>
+          <argument key="tr" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.tr.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.tr.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.tr.xlf</argument>
+          </argument>
+          <argument key="uk" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.uk.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.uk.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.uk.xlf</argument>
+          </argument>
+          <argument key="vi" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.vi.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.vi.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.vi.xlf</argument>
+          </argument>
+          <argument key="zh_CN" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.zh_CN.xlf</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations/validators.zh_CN.xlf</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.zh_CN.xlf</argument>
+          </argument>
+          <argument key="zh_TW" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations/validators.zh_TW.xlf</argument>
+          </argument>
+          <argument key="pt_PT" type="collection">
+            <argument>/app/vendor/symfony/security-core/Resources/translations/security.pt_PT.xlf</argument>
+          </argument>
+        </argument>
+        <argument key="scanned_directories" type="collection">
+          <argument>/app/vendor/symfony/validator/Resources/translations</argument>
+          <argument>/app/vendor/symfony/form/Resources/translations</argument>
+          <argument>/app/vendor/symfony/security-core/Resources/translations</argument>
+          <argument>/app/vendor/symfony/framework-bundle/translations</argument>
+          <argument>/app/apps/backoffice/backend/translations</argument>
+        </argument>
+        <argument key="cache_vary" type="collection">
+          <argument key="scanned_directories" type="collection">
+            <argument>/app/vendor/symfony/validator/Resources/translations</argument>
+            <argument>/app/vendor/symfony/form/Resources/translations</argument>
+            <argument>/app/vendor/symfony/security-core/Resources/translations</argument>
+            <argument>/app/vendor/symfony/framework-bundle/translations</argument>
+            <argument>translations</argument>
+          </argument>
+        </argument>
+      </argument>
+      <call method="setConfigCacheFactory">
+        <argument type="service" id="config_cache_factory"/>
+      </call>
+      <call method="setFallbackLocales">
+        <argument type="collection">
+          <argument>en</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="translator.logging" class="Symfony\Component\Translation\LoggingTranslator" public="false">
+      <tag name="monolog.logger" channel="translation"/>
+      <argument type="service" id="translator.logging.inner"/>
+      <argument type="service" id="logger"/>
+    </service>
+    <service id="translator.formatter.default" class="Symfony\Component\Translation\Formatter\MessageFormatter" public="false">
+      <argument type="service" id="identity_translator"/>
+    </service>
+    <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader" public="false">
+      <tag name="translation.loader" alias="php"/>
+    </service>
+    <service id="translation.loader.yml" class="Symfony\Component\Translation\Loader\YamlFileLoader" public="false">
+      <tag name="translation.loader" alias="yaml" legacy_alias="yml" legacy-alias="yml"/>
+    </service>
+    <service id="translation.loader.xliff" class="Symfony\Component\Translation\Loader\XliffFileLoader" public="false">
+      <tag name="translation.loader" alias="xlf" legacy_alias="xliff" legacy-alias="xliff"/>
+    </service>
+    <service id="translation.loader.po" class="Symfony\Component\Translation\Loader\PoFileLoader" public="false">
+      <tag name="translation.loader" alias="po"/>
+    </service>
+    <service id="translation.loader.mo" class="Symfony\Component\Translation\Loader\MoFileLoader" public="false">
+      <tag name="translation.loader" alias="mo"/>
+    </service>
+    <service id="translation.loader.qt" class="Symfony\Component\Translation\Loader\QtFileLoader" public="false">
+      <tag name="translation.loader" alias="ts"/>
+    </service>
+    <service id="translation.loader.csv" class="Symfony\Component\Translation\Loader\CsvFileLoader" public="false">
+      <tag name="translation.loader" alias="csv"/>
+    </service>
+    <service id="translation.loader.res" class="Symfony\Component\Translation\Loader\IcuResFileLoader" public="false">
+      <tag name="translation.loader" alias="res"/>
+    </service>
+    <service id="translation.loader.dat" class="Symfony\Component\Translation\Loader\IcuDatFileLoader" public="false">
+      <tag name="translation.loader" alias="dat"/>
+    </service>
+    <service id="translation.loader.ini" class="Symfony\Component\Translation\Loader\IniFileLoader" public="false">
+      <tag name="translation.loader" alias="ini"/>
+    </service>
+    <service id="translation.loader.json" class="Symfony\Component\Translation\Loader\JsonFileLoader" public="false">
+      <tag name="translation.loader" alias="json"/>
+    </service>
+    <service id="translation.dumper.php" class="Symfony\Component\Translation\Dumper\PhpFileDumper" public="false">
+      <tag name="translation.dumper" alias="php"/>
+    </service>
+    <service id="translation.dumper.xliff" class="Symfony\Component\Translation\Dumper\XliffFileDumper" public="false">
+      <tag name="translation.dumper" alias="xlf"/>
+    </service>
+    <service id="translation.dumper.po" class="Symfony\Component\Translation\Dumper\PoFileDumper" public="false">
+      <tag name="translation.dumper" alias="po"/>
+    </service>
+    <service id="translation.dumper.mo" class="Symfony\Component\Translation\Dumper\MoFileDumper" public="false">
+      <tag name="translation.dumper" alias="mo"/>
+    </service>
+    <service id="translation.dumper.yml" class="Symfony\Component\Translation\Dumper\YamlFileDumper" public="false">
+      <tag name="translation.dumper" alias="yml"/>
+    </service>
+    <service id="translation.dumper.yaml" class="Symfony\Component\Translation\Dumper\YamlFileDumper" public="false">
+      <tag name="translation.dumper" alias="yaml"/>
+      <argument>yaml</argument>
+    </service>
+    <service id="translation.dumper.qt" class="Symfony\Component\Translation\Dumper\QtFileDumper" public="false">
+      <tag name="translation.dumper" alias="ts"/>
+    </service>
+    <service id="translation.dumper.csv" class="Symfony\Component\Translation\Dumper\CsvFileDumper" public="false">
+      <tag name="translation.dumper" alias="csv"/>
+    </service>
+    <service id="translation.dumper.ini" class="Symfony\Component\Translation\Dumper\IniFileDumper" public="false">
+      <tag name="translation.dumper" alias="ini"/>
+    </service>
+    <service id="translation.dumper.json" class="Symfony\Component\Translation\Dumper\JsonFileDumper" public="false">
+      <tag name="translation.dumper" alias="json"/>
+    </service>
+    <service id="translation.dumper.res" class="Symfony\Component\Translation\Dumper\IcuResFileDumper" public="false">
+      <tag name="translation.dumper" alias="res"/>
+    </service>
+    <service id="translation.extractor.php" class="Symfony\Component\Translation\Extractor\PhpExtractor" public="false">
+      <tag name="translation.extractor" alias="php"/>
+    </service>
+    <service id="translation.reader" class="Symfony\Component\Translation\Reader\TranslationReader" public="false">
+      <call method="addLoader">
+        <argument>php</argument>
+        <argument type="service" id="translation.loader.php"/>
+      </call>
+      <call method="addLoader">
+        <argument>yaml</argument>
+        <argument type="service" id="translation.loader.yml"/>
+      </call>
+      <call method="addLoader">
+        <argument>yml</argument>
+        <argument type="service" id="translation.loader.yml"/>
+      </call>
+      <call method="addLoader">
+        <argument>xlf</argument>
+        <argument type="service" id="translation.loader.xliff"/>
+      </call>
+      <call method="addLoader">
+        <argument>xliff</argument>
+        <argument type="service" id="translation.loader.xliff"/>
+      </call>
+      <call method="addLoader">
+        <argument>po</argument>
+        <argument type="service" id="translation.loader.po"/>
+      </call>
+      <call method="addLoader">
+        <argument>mo</argument>
+        <argument type="service" id="translation.loader.mo"/>
+      </call>
+      <call method="addLoader">
+        <argument>ts</argument>
+        <argument type="service" id="translation.loader.qt"/>
+      </call>
+      <call method="addLoader">
+        <argument>csv</argument>
+        <argument type="service" id="translation.loader.csv"/>
+      </call>
+      <call method="addLoader">
+        <argument>res</argument>
+        <argument type="service" id="translation.loader.res"/>
+      </call>
+      <call method="addLoader">
+        <argument>dat</argument>
+        <argument type="service" id="translation.loader.dat"/>
+      </call>
+      <call method="addLoader">
+        <argument>ini</argument>
+        <argument type="service" id="translation.loader.ini"/>
+      </call>
+      <call method="addLoader">
+        <argument>json</argument>
+        <argument type="service" id="translation.loader.json"/>
+      </call>
+    </service>
+    <service id="translation.extractor" class="Symfony\Component\Translation\Extractor\ChainExtractor" public="false">
+      <call method="addExtractor">
+        <argument>php</argument>
+        <argument type="service" id="translation.extractor.php"/>
+      </call>
+    </service>
+    <service id="translation.writer" class="Symfony\Component\Translation\Writer\TranslationWriter" public="false">
+      <call method="addDumper">
+        <argument>php</argument>
+        <argument type="service" id="translation.dumper.php"/>
+      </call>
+      <call method="addDumper">
+        <argument>xlf</argument>
+        <argument type="service" id="translation.dumper.xliff"/>
+      </call>
+      <call method="addDumper">
+        <argument>po</argument>
+        <argument type="service" id="translation.dumper.po"/>
+      </call>
+      <call method="addDumper">
+        <argument>mo</argument>
+        <argument type="service" id="translation.dumper.mo"/>
+      </call>
+      <call method="addDumper">
+        <argument>yml</argument>
+        <argument type="service" id="translation.dumper.yml"/>
+      </call>
+      <call method="addDumper">
+        <argument>yaml</argument>
+        <argument type="service" id="translation.dumper.yaml"/>
+      </call>
+      <call method="addDumper">
+        <argument>ts</argument>
+        <argument type="service" id="translation.dumper.qt"/>
+      </call>
+      <call method="addDumper">
+        <argument>csv</argument>
+        <argument type="service" id="translation.dumper.csv"/>
+      </call>
+      <call method="addDumper">
+        <argument>ini</argument>
+        <argument type="service" id="translation.dumper.ini"/>
+      </call>
+      <call method="addDumper">
+        <argument>json</argument>
+        <argument type="service" id="translation.dumper.json"/>
+      </call>
+      <call method="addDumper">
+        <argument>res</argument>
+        <argument type="service" id="translation.dumper.res"/>
+      </call>
+    </service>
+    <service id="translation.warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer" public="false">
+      <tag name="container.service_subscriber" id="translator"/>
+      <tag name="kernel.cache_warmer"/>
+      <argument type="service" id=".service_locator.JFjjyG5.translation.warmer"/>
+    </service>
+    <service id="debug.debug_handlers_listener" class="Symfony\Component\HttpKernel\EventListener\DebugHandlersListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="monolog.logger" channel="php"/>
+      <tag name="container.hot_path"/>
+      <argument>null</argument>
+      <argument type="service" id="logger" on-invalid="null"/>
+      <argument>null</argument>
+      <argument>-1</argument>
+      <argument>true</argument>
+      <argument type="service" id="debug.file_link_formatter"/>
+      <argument>true</argument>
+    </service>
+    <service id="debug.file_link_formatter" class="Symfony\Component\HttpKernel\Debug\FileLinkFormatter" public="false">
+      <argument>null</argument>
+    </service>
+    <service id="debug.stopwatch" class="Symfony\Component\Stopwatch\Stopwatch">
+      <tag name="kernel.reset" method="reset"/>
+      <argument>true</argument>
+    </service>
+    <service id="debug.event_dispatcher" class="Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher" public="false">
+      <tag name="container.hot_path"/>
+      <tag name="monolog.logger" channel="event"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument type="service" id="debug.event_dispatcher.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+      <argument type="service" id="logger" on-invalid="null"/>
+      <argument type="service" id="request_stack" on-invalid="null"/>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="App\Shared\Infrastructure\Symfony\AddJsonBodyToRequestListener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.exception</argument>
+        <argument type="collection">
+          <argument type="service" id="App\Shared\Infrastructure\Symfony\ApiExceptionListener"/>
+          <argument>onException</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="App\Shared\Infrastructure\Symfony\BasicHttpAuthMiddleware"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service" id="response_listener"/>
+          <argument>onKernelResponse</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service" id="streamed_response_listener"/>
+          <argument>onKernelResponse</argument>
+        </argument>
+        <argument>-1024</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="locale_listener"/>
+          <argument>setDefaultLocale</argument>
+        </argument>
+        <argument>100</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="locale_listener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>16</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.finish_request</argument>
+        <argument type="collection">
+          <argument type="service" id="locale_listener"/>
+          <argument>onKernelFinishRequest</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="validate_request_listener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>256</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service" id="disallow_search_engine_index_response_listener"/>
+          <argument>onResponse</argument>
+        </argument>
+        <argument>-255</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.controller_arguments</argument>
+        <argument type="collection">
+          <argument type="service" id="exception_listener"/>
+          <argument>onControllerArguments</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.exception</argument>
+        <argument type="collection">
+          <argument type="service" id="exception_listener"/>
+          <argument>logKernelException</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.exception</argument>
+        <argument type="collection">
+          <argument type="service" id="exception_listener"/>
+          <argument>onKernelException</argument>
+        </argument>
+        <argument>-128</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="locale_aware_listener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>15</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.finish_request</argument>
+        <argument type="collection">
+          <argument type="service" id="locale_aware_listener"/>
+          <argument>onKernelFinishRequest</argument>
+        </argument>
+        <argument>-15</argument>
+      </call>
+      <call method="addListener">
+        <argument>console.error</argument>
+        <argument type="collection">
+          <argument type="service" id="console.error_listener"/>
+          <argument>onConsoleError</argument>
+        </argument>
+        <argument>-128</argument>
+      </call>
+      <call method="addListener">
+        <argument>console.terminate</argument>
+        <argument type="collection">
+          <argument type="service" id="console.error_listener"/>
+          <argument>onConsoleTerminate</argument>
+        </argument>
+        <argument>-128</argument>
+      </call>
+      <call method="addListener">
+        <argument>console.error</argument>
+        <argument type="collection">
+          <argument type="service" id="console.suggest_missing_package_subscriber"/>
+          <argument>onConsoleError</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="session_listener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>128</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service" id="session_listener"/>
+          <argument>onKernelResponse</argument>
+        </argument>
+        <argument>-1000</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.finish_request</argument>
+        <argument type="collection">
+          <argument type="service" id="session_listener"/>
+          <argument>onFinishRequest</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Messenger\Event\WorkerMessageFailedEvent</argument>
+        <argument type="collection">
+          <argument type="service" id="messenger.retry.send_failed_message_for_retry_listener"/>
+          <argument>onMessageFailed</argument>
+        </argument>
+        <argument>100</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Messenger\Event\WorkerStartedEvent</argument>
+        <argument type="collection">
+          <argument type="service" id="messenger.listener.stop_worker_on_restart_signal_listener"/>
+          <argument>onWorkerStarted</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Messenger\Event\WorkerRunningEvent</argument>
+        <argument type="collection">
+          <argument type="service" id="messenger.listener.stop_worker_on_restart_signal_listener"/>
+          <argument>onWorkerRunning</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Mailer\Event\MessageEvent</argument>
+        <argument type="collection">
+          <argument type="service" id="mailer.envelope_listener"/>
+          <argument>onMessage</argument>
+        </argument>
+        <argument>-255</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Mailer\Event\MessageEvent</argument>
+        <argument type="collection">
+          <argument type="service" id="mailer.logger_message_listener"/>
+          <argument>onMessage</argument>
+        </argument>
+        <argument>-255</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="debug.debug_handlers_listener"/>
+          <argument>configure</argument>
+        </argument>
+        <argument>2048</argument>
+      </call>
+      <call method="addListener">
+        <argument>console.command</argument>
+        <argument type="collection">
+          <argument type="service" id="debug.debug_handlers_listener"/>
+          <argument>configure</argument>
+        </argument>
+        <argument>2048</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="router_listener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>32</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.finish_request</argument>
+        <argument type="collection">
+          <argument type="service" id="router_listener"/>
+          <argument>onKernelFinishRequest</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.exception</argument>
+        <argument type="collection">
+          <argument type="service" id="router_listener"/>
+          <argument>onKernelException</argument>
+        </argument>
+        <argument>-64</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service" id="web_link.add_link_header_listener"/>
+          <argument>onKernelResponse</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+    </service>
+    <service id="debug.controller_resolver" class="Symfony\Component\HttpKernel\Controller\TraceableControllerResolver" public="false">
+      <tag name="monolog.logger" channel="request"/>
+      <argument type="service" id="debug.controller_resolver.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id="debug.argument_resolver" class="Symfony\Component\HttpKernel\Controller\TraceableArgumentResolver" public="false">
+      <argument type="service" id="debug.argument_resolver.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor" public="false">
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver" public="false">
+      <call method="addLoader">
+        <argument type="service" id="routing.loader.xml"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="routing.loader.yml"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="routing.loader.php"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="routing.loader.glob"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="routing.loader.directory"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="routing.loader.container"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="routing.loader.annotation"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="routing.loader.annotation.directory"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="routing.loader.annotation.file"/>
+      </call>
+    </service>
+    <service id="routing.loader.xml" class="Symfony\Component\Routing\Loader\XmlFileLoader" public="false">
+      <tag name="routing.loader"/>
+      <argument type="service" id="file_locator"/>
+    </service>
+    <service id="routing.loader.yml" class="Symfony\Component\Routing\Loader\YamlFileLoader" public="false">
+      <tag name="routing.loader"/>
+      <argument type="service" id="file_locator"/>
+    </service>
+    <service id="routing.loader.php" class="Symfony\Component\Routing\Loader\PhpFileLoader" public="false">
+      <tag name="routing.loader"/>
+      <argument type="service" id="file_locator"/>
+    </service>
+    <service id="routing.loader.glob" class="Symfony\Component\Routing\Loader\GlobFileLoader" public="false">
+      <tag name="routing.loader"/>
+      <argument type="service" id="file_locator"/>
+    </service>
+    <service id="routing.loader.directory" class="Symfony\Component\Routing\Loader\DirectoryLoader" public="false">
+      <tag name="routing.loader"/>
+      <argument type="service" id="file_locator"/>
+    </service>
+    <service id="routing.loader.container" class="Symfony\Component\Routing\Loader\ContainerLoader" public="false">
+      <tag name="routing.loader"/>
+      <argument type="service" id=".service_locator.YAvakM6"/>
+    </service>
+    <service id="routing.loader" class="Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader" public="true">
+      <argument type="service" id="routing.resolver"/>
+      <argument type="collection"/>
+    </service>
+    <service id="router.default" class="Symfony\Bundle\FrameworkBundle\Routing\Router" public="false">
+      <tag name="monolog.logger" channel="router"/>
+      <tag name="container.service_subscriber" id="routing.loader"/>
+      <argument type="service" id=".service_locator.ld1.260.router.default"/>
+      <argument>kernel::loadRoutes</argument>
+      <argument type="collection">
+        <argument key="cache_dir">/app/apps/backoffice/backend/var/cache/dev</argument>
+        <argument key="debug">true</argument>
+        <argument key="generator_class">Symfony\Component\Routing\Generator\CompiledUrlGenerator</argument>
+        <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper</argument>
+        <argument key="matcher_class">Symfony\Bundle\FrameworkBundle\Routing\RedirectableCompiledUrlMatcher</argument>
+        <argument key="matcher_dumper_class">Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper</argument>
+        <argument key="strict_requirements">true</argument>
+        <argument key="resource_type">service</argument>
+      </argument>
+      <argument type="service" id="router.request_context" on-invalid="ignore"/>
+      <argument type="service" id="parameter_bag" on-invalid="ignore"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+      <argument>en</argument>
+      <call method="setConfigCacheFactory">
+        <argument type="service" id="config_cache_factory"/>
+      </call>
+    </service>
+    <service id="router.request_context" class="Symfony\Component\Routing\RequestContext" public="false">
+      <argument></argument>
+      <argument>GET</argument>
+      <argument>localhost</argument>
+      <argument>http</argument>
+      <argument>80</argument>
+      <argument>443</argument>
+    </service>
+    <service id="router.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer" public="false">
+      <tag name="container.service_subscriber" id="router"/>
+      <tag name="kernel.cache_warmer"/>
+      <argument type="service" id=".service_locator.3TLJ8AE.router.cache_warmer"/>
+    </service>
+    <service id="router_listener" class="Symfony\Component\HttpKernel\EventListener\RouterListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="monolog.logger" channel="request"/>
+      <tag name="container.hot_path"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="router.default"/>
+      <argument type="service" id="request_stack"/>
+      <argument type="service" id="router.request_context" on-invalid="ignore"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+      <argument>/app/apps/backoffice/backend</argument>
+      <argument>true</argument>
+    </service>
+    <service id="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" class="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" public="true">
+      <argument type="service" id="router.default"/>
+      <argument>80</argument>
+      <argument>443</argument>
+    </service>
+    <service id="Symfony\Bundle\FrameworkBundle\Controller\TemplateController" class="Symfony\Bundle\FrameworkBundle\Controller\TemplateController" public="true">
+      <argument>null</argument>
+    </service>
+    <service id="routing.loader.annotation" class="Symfony\Bundle\FrameworkBundle\Routing\AnnotatedRouteControllerLoader" public="false">
+      <tag name="routing.loader" priority="-10"/>
+      <argument type="service" id="annotations.cached_reader"/>
+    </service>
+    <service id="routing.loader.annotation.directory" class="Symfony\Component\Routing\Loader\AnnotationDirectoryLoader" public="false">
+      <tag name="routing.loader" priority="-10"/>
+      <argument type="service" id="file_locator"/>
+      <argument type="service" id="routing.loader.annotation"/>
+    </service>
+    <service id="routing.loader.annotation.file" class="Symfony\Component\Routing\Loader\AnnotationFileLoader" public="false">
+      <tag name="routing.loader" priority="-10"/>
+      <argument type="service" id="file_locator"/>
+      <argument type="service" id="routing.loader.annotation"/>
+    </service>
+    <service id=".2_PhpArrayAdapter~7WPT3rJ" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" public="false">
+      <argument>/app/apps/backoffice/backend/var/cache/dev/annotations.php</argument>
+      <argument type="service" id="cache.annotations"/>
+      <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
+    </service>
+    <service id=".1_ArrayCache~7WPT3rJ" class="Doctrine\Common\Cache\ArrayCache" public="false"/>
+    <service id="annotations.reader" class="Doctrine\Common\Annotations\AnnotationReader" public="false">
+      <call method="addGlobalIgnoredName">
+        <argument>required</argument>
+        <argument type="service" id="annotations.dummy_registry"/>
+      </call>
+    </service>
+    <service id="annotations.dummy_registry" class="Doctrine\Common\Annotations\AnnotationRegistry" public="false">
+      <call method="registerUniqueLoader">
+        <argument>class_exists</argument>
+      </call>
+    </service>
+    <service id="annotations.cached_reader" class="Doctrine\Common\Annotations\CachedReader" public="false">
+      <tag name="annotations.cached_reader"/>
+      <argument type="service" id="annotations.reader"/>
+      <argument type="service" id=".1_ArrayCache~7WPT3rJ"/>
+      <argument>true</argument>
+      <property name="cacheProviderBackup" type="service" id="annotations.cache"/>
+    </service>
+    <service id="annotations.filesystem_cache" class="Doctrine\Common\Cache\FilesystemCache" public="false">
+      <argument></argument>
+    </service>
+    <service id="annotations.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer" public="false">
+      <tag name="kernel.cache_warmer"/>
+      <argument type="service" id="annotations.reader"/>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/annotations.php</argument>
+      <argument>#^Symfony\\(?:Component\\HttpKernel\\|Bundle\\FrameworkBundle\\Controller\\(?!.*Controller$))#</argument>
+      <argument>true</argument>
+    </service>
+    <service id="annotations.cache" class="Symfony\Component\Cache\DoctrineProvider" public="false">
+      <argument type="service" id=".2_PhpArrayAdapter~7WPT3rJ"/>
+    </service>
+    <service id="property_accessor" class="Symfony\Component\PropertyAccess\PropertyAccessor" public="false">
+      <argument>false</argument>
+      <argument>false</argument>
+      <argument type="service" id="cache.property_access" on-invalid="ignore"/>
+      <argument>true</argument>
+    </service>
+    <service id="secrets.vault" class="Symfony\Bundle\FrameworkBundle\Secrets\SodiumVault">
+      <tag name="container.env_var_loader"/>
+      <argument>/app/apps/backoffice/backend/config/secrets/dev</argument>
+      <argument>%env(base64:default::SYMFONY_DECRYPTION_SECRET)%</argument>
+    </service>
+    <service id="secrets.local_vault" class="Symfony\Bundle\FrameworkBundle\Secrets\DotenvVault">
+      <argument>/app/apps/backoffice/backend/.env.dev.local</argument>
+    </service>
+    <service id=".2_~Vhgo14P" public="false">
+      <argument type="service" id="request_stack"/>
+      <argument>true</argument>
+      <factory class="Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer" method="isDebug"/>
+    </service>
+    <service id=".1_~Vhgo14P" public="false">
+      <argument type="service" id="request_stack"/>
+      <factory class="Symfony\Component\ErrorHandler\ErrorRenderer\SerializerErrorRenderer" method="getPreferredFormat"/>
+    </service>
+    <service id="serializer" class="Symfony\Component\Serializer\Serializer" public="true">
+      <argument type="collection">
+        <argument type="service" id="serializer.normalizer.problem"/>
+        <argument type="service" id="serializer.normalizer.json_serializable"/>
+        <argument type="service" id="serializer.normalizer.datetime"/>
+        <argument type="service" id="serializer.normalizer.constraint_violation_list"/>
+        <argument type="service" id="serializer.normalizer.datetimezone"/>
+        <argument type="service" id="serializer.normalizer.dateinterval"/>
+        <argument type="service" id="serializer.normalizer.data_uri"/>
+        <argument type="service" id="serializer.denormalizer.array"/>
+        <argument type="service" id="serializer.normalizer.object"/>
+      </argument>
+      <argument type="collection">
+        <argument type="service" id="serializer.encoder.xml"/>
+        <argument type="service" id="serializer.encoder.json"/>
+        <argument type="service" id="serializer.encoder.yaml"/>
+        <argument type="service" id="serializer.encoder.csv"/>
+      </argument>
+    </service>
+    <service id="serializer.mapping.class_discriminator_resolver" class="Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata" public="false">
+      <argument type="service" id="serializer.mapping.class_metadata_factory"/>
+    </service>
+    <service id="serializer.normalizer.constraint_violation_list" class="Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer" public="false">
+      <tag name="serializer.normalizer" priority="-915"/>
+      <argument type="collection"/>
+      <argument type="service" id="serializer.name_converter.metadata_aware"/>
+    </service>
+    <service id="serializer.normalizer.datetimezone" class="Symfony\Component\Serializer\Normalizer\DateTimeZoneNormalizer" public="false">
+      <tag name="serializer.normalizer" priority="-915"/>
+    </service>
+    <service id="serializer.normalizer.dateinterval" class="Symfony\Component\Serializer\Normalizer\DateIntervalNormalizer" public="false">
+      <tag name="serializer.normalizer" priority="-915"/>
+    </service>
+    <service id="serializer.normalizer.data_uri" class="Symfony\Component\Serializer\Normalizer\DataUriNormalizer" public="false">
+      <tag name="serializer.normalizer" priority="-920"/>
+      <argument type="service" id="mime_types" on-invalid="null"/>
+    </service>
+    <service id="serializer.normalizer.datetime" class="Symfony\Component\Serializer\Normalizer\DateTimeNormalizer" public="false">
+      <tag name="serializer.normalizer" priority="-910"/>
+    </service>
+    <service id="serializer.normalizer.json_serializable" class="Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer" public="false">
+      <tag name="serializer.normalizer" priority="-900"/>
+    </service>
+    <service id="serializer.normalizer.problem" class="Symfony\Component\Serializer\Normalizer\ProblemNormalizer" public="false">
+      <tag name="serializer.normalizer" priority="-890"/>
+      <argument>true</argument>
+    </service>
+    <service id="serializer.normalizer.object" class="Symfony\Component\Serializer\Normalizer\ObjectNormalizer" public="false">
+      <tag name="serializer.normalizer" priority="-1000"/>
+      <argument type="service" id="serializer.mapping.class_metadata_factory"/>
+      <argument type="service" id="serializer.name_converter.metadata_aware"/>
+      <argument type="service" id="property_accessor"/>
+      <argument type="service" id="property_info" on-invalid="ignore"/>
+      <argument type="service" id="serializer.mapping.class_discriminator_resolver" on-invalid="ignore"/>
+      <argument>null</argument>
+      <argument type="collection"/>
+    </service>
+    <service id="serializer.denormalizer.array" class="Symfony\Component\Serializer\Normalizer\ArrayDenormalizer" public="false">
+      <tag name="serializer.normalizer" priority="-990"/>
+    </service>
+    <service id="serializer.mapping.chain_loader" class="Symfony\Component\Serializer\Mapping\Loader\LoaderChain" public="false">
+      <argument type="collection">
+        <argument type="service">
+          <service class="Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader" public="false">
+            <argument type="service" id="annotations.cached_reader"/>
+          </service>
+        </argument>
+      </argument>
+    </service>
+    <service id="serializer.mapping.class_metadata_factory" class="Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory" public="false">
+      <argument type="service" id="serializer.mapping.chain_loader"/>
+      <argument>null</argument>
+    </service>
+    <service id="serializer.mapping.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\SerializerCacheWarmer" public="false">
+      <tag name="kernel.cache_warmer"/>
+      <argument type="collection">
+        <argument type="service">
+          <service class="Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader" public="false">
+            <argument type="service" id="annotations.cached_reader"/>
+          </service>
+        </argument>
+      </argument>
+      <argument>/app/apps/backoffice/backend/var/cache/dev/serialization.php</argument>
+    </service>
+    <service id="serializer.mapping.cache.symfony" class="Psr\Cache\CacheItemPoolInterface" public="false">
+      <argument>/app/apps/backoffice/backend/var/cache/dev/serialization.php</argument>
+      <argument type="service" id="cache.serializer"/>
+      <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
+    </service>
+    <service id="serializer.encoder.xml" class="Symfony\Component\Serializer\Encoder\XmlEncoder" public="false">
+      <tag name="serializer.encoder"/>
+    </service>
+    <service id="serializer.encoder.json" class="Symfony\Component\Serializer\Encoder\JsonEncoder" public="false">
+      <tag name="serializer.encoder"/>
+    </service>
+    <service id="serializer.encoder.yaml" class="Symfony\Component\Serializer\Encoder\YamlEncoder" public="false">
+      <tag name="serializer.encoder"/>
+    </service>
+    <service id="serializer.encoder.csv" class="Symfony\Component\Serializer\Encoder\CsvEncoder" public="false">
+      <tag name="serializer.encoder"/>
+    </service>
+    <service id="serializer.name_converter.camel_case_to_snake_case" class="Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter" public="false"/>
+    <service id="serializer.name_converter.metadata_aware" class="Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter" public="false">
+      <argument type="service" id="serializer.mapping.class_metadata_factory"/>
+    </service>
+    <service id="property_info.serializer_extractor" class="Symfony\Component\PropertyInfo\Extractor\SerializerExtractor" public="false">
+      <tag name="property_info.list_extractor" priority="-999"/>
+      <argument type="service" id="serializer.mapping.class_metadata_factory"/>
+    </service>
+    <service id="error_handler.error_renderer.serializer" class="Symfony\Component\ErrorHandler\ErrorRenderer\SerializerErrorRenderer" public="false">
+      <argument type="service" id="serializer"/>
+      <argument type="service" id=".1_~Vhgo14P"/>
+      <argument type="service" id="error_handler.error_renderer.html"/>
+      <argument type="service" id=".2_~Vhgo14P"/>
+    </service>
+    <service id="property_info" class="Symfony\Component\PropertyInfo\PropertyInfoExtractor" public="false">
+      <argument type="iterator">
+        <argument type="service" id="property_info.serializer_extractor"/>
+        <argument type="service" id="property_info.reflection_extractor"/>
+      </argument>
+      <argument type="iterator">
+        <argument type="service" id="property_info.php_doc_extractor"/>
+        <argument type="service" id="property_info.reflection_extractor"/>
+      </argument>
+      <argument type="iterator">
+        <argument type="service" id="property_info.php_doc_extractor"/>
+      </argument>
+      <argument type="iterator">
+        <argument type="service" id="property_info.reflection_extractor"/>
+      </argument>
+      <argument type="iterator">
+        <argument type="service" id="property_info.reflection_extractor"/>
+      </argument>
+    </service>
+    <service id="property_info.reflection_extractor" class="Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor" public="false">
+      <tag name="property_info.list_extractor" priority="-1000"/>
+      <tag name="property_info.type_extractor" priority="-1002"/>
+      <tag name="property_info.access_extractor" priority="-1000"/>
+      <tag name="property_info.initializable_extractor" priority="-1000"/>
+    </service>
+    <service id="property_info.php_doc_extractor" class="Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor">
+      <tag name="property_info.description_extractor" priority="-1000"/>
+      <tag name="property_info.type_extractor" priority="-1001"/>
+    </service>
+    <service id="web_link.add_link_header_listener" class="Symfony\Component\WebLink\EventListener\AddLinkHeaderListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+    </service>
+    <service id="mime_types" class="Symfony\Component\Mime\MimeTypes" public="false">
+      <call method="setDefault">
+        <argument type="service" id="mime_types"/>
+      </call>
+    </service>
+    <service id=".instanceof.App\Shared\Domain\Bus\Command\CommandHandler.0.App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommandHandler" class="App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommandHandler" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommandHandler" class="App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommandHandler" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Shared\Domain\Bus\Event\DomainEventSubscriber.0.App\Backoffice\Courses\Application\Create\CreateBackofficeCourseOnCourseCreated" class="App\Backoffice\Courses\Application\Create\CreateBackofficeCourseOnCourseCreated" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Backoffice\Courses\Application\Create\CreateBackofficeCourseOnCourseCreated" class="App\Backoffice\Courses\Application\Create\CreateBackofficeCourseOnCourseCreated" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Shared\Domain\Bus\Query\QueryHandler.0.App\Backoffice\Courses\Application\SearchAll\SearchAllBackofficeCoursesQueryHandler" class="App\Backoffice\Courses\Application\SearchAll\SearchAllBackofficeCoursesQueryHandler" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Backoffice\Courses\Application\SearchAll\SearchAllBackofficeCoursesQueryHandler" class="App\Backoffice\Courses\Application\SearchAll\SearchAllBackofficeCoursesQueryHandler" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Shared\Domain\Bus\Query\QueryHandler.0.App\Backoffice\Courses\Application\SearchByCriteria\SearchBackofficeCoursesByCriteriaQueryHandler" class="App\Backoffice\Courses\Application\SearchByCriteria\SearchBackofficeCoursesByCriteriaQueryHandler" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Backoffice\Courses\Application\SearchByCriteria\SearchBackofficeCoursesByCriteriaQueryHandler" class="App\Backoffice\Courses\Application\SearchByCriteria\SearchBackofficeCoursesByCriteriaQueryHandler" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".service_locator.CmORmuK" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="base64" type="service" id="container.env_var_processor"/>
+        <argument key="bool" type="service" id="container.env_var_processor"/>
+        <argument key="const" type="service" id="container.env_var_processor"/>
+        <argument key="csv" type="service" id="container.env_var_processor"/>
+        <argument key="default" type="service" id="container.env_var_processor"/>
+        <argument key="file" type="service" id="container.env_var_processor"/>
+        <argument key="float" type="service" id="container.env_var_processor"/>
+        <argument key="int" type="service" id="container.env_var_processor"/>
+        <argument key="json" type="service" id="container.env_var_processor"/>
+        <argument key="key" type="service" id="container.env_var_processor"/>
+        <argument key="query_string" type="service" id="container.env_var_processor"/>
+        <argument key="require" type="service" id="container.env_var_processor"/>
+        <argument key="resolve" type="service" id="container.env_var_processor"/>
+        <argument key="string" type="service" id="container.env_var_processor"/>
+        <argument key="trim" type="service" id="container.env_var_processor"/>
+        <argument key="url" type="service" id="container.env_var_processor"/>
+      </argument>
+    </service>
+    <service id=".service_locator.uAI1P6g" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="Symfony\Component\Validator\Constraints\EmailValidator" type="service" id="validator.email"/>
+        <argument key="Symfony\Component\Validator\Constraints\ExpressionValidator" type="service" id="validator.expression"/>
+        <argument key="Symfony\Component\Validator\Constraints\NotCompromisedPasswordValidator" type="service" id="validator.not_compromised_password"/>
+        <argument key="validator.expression" type="service" id="validator.expression"/>
+      </argument>
+    </service>
+    <service id=".service_locator._cmka45" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="inline" type="service" id="fragment.renderer.inline"/>
+      </argument>
+    </service>
+    <service id="debug.argument_resolver.request_attribute" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver">
+      <tag name="controller.argument_value_resolver" priority="100"/>
+      <argument type="service" id="debug.argument_resolver.request_attribute.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id="debug.argument_resolver.request" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver">
+      <tag name="controller.argument_value_resolver" priority="50"/>
+      <argument type="service" id="debug.argument_resolver.request.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id="debug.argument_resolver.session" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver">
+      <tag name="controller.argument_value_resolver" priority="50"/>
+      <argument type="service" id="debug.argument_resolver.session.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id="debug.argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver">
+      <tag name="controller.argument_value_resolver" priority="-50"/>
+      <argument type="service" id="debug.argument_resolver.service.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id="debug.argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver">
+      <tag name="controller.argument_value_resolver" priority="-100"/>
+      <argument type="service" id="debug.argument_resolver.default.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id="debug.argument_resolver.variadic" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver">
+      <tag name="controller.argument_value_resolver" priority="-150"/>
+      <argument type="service" id="debug.argument_resolver.variadic.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id="debug.argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver">
+      <tag name="controller.argument_value_resolver" priority="-200"/>
+      <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
+      <argument type="service" id="debug.stopwatch"/>
+    </service>
+    <service id=".service_locator.dY5cnw3" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service" id="form.type.choice"/>
+        <argument key="Symfony\Component\Form\Extension\Core\Type\FileType" type="service" id="form.type.file"/>
+        <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service" id="form.type.form"/>
+      </argument>
+    </service>
+    <service id="messenger.bus.default.middleware.traceable" class="Symfony\Component\Messenger\Middleware\TraceableMiddleware" public="false">
+      <argument type="service" id="debug.stopwatch"/>
+      <argument>messenger.bus.default</argument>
+    </service>
+    <service id="messenger.bus.default.middleware.add_bus_name_stamp_middleware" class="Symfony\Component\Messenger\Middleware\AddBusNameStampMiddleware" public="false">
+      <argument>messenger.bus.default</argument>
+    </service>
+    <service id="messenger.bus.default.middleware.handle_message" class="Symfony\Component\Messenger\Middleware\HandleMessageMiddleware" public="false">
+      <argument type="service" id="messenger.bus.default.messenger.handlers_locator"/>
+      <call method="setLogger">
+        <argument type="service" id="logger" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id=".service_locator.CCTmIC0" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="messenger.bus.default" type="service" id="messenger.bus.default"/>
+      </argument>
+    </service>
+    <service id=".messenger.handler_descriptor.tGvt0LH" class="Symfony\Component\Messenger\Handler\HandlerDescriptor">
+      <argument type="service" id="mailer.messenger.message_handler"/>
+      <argument type="collection"/>
+    </service>
+    <service id=".messenger.handler_descriptor.vMw0m61" class="Symfony\Component\Messenger\Handler\HandlerDescriptor">
+      <argument type="service" id="chatter.messenger.chat_handler"/>
+      <argument type="collection"/>
+    </service>
+    <service id=".messenger.handler_descriptor.XZowc.T" class="Symfony\Component\Messenger\Handler\HandlerDescriptor">
+      <argument type="service" id="texter.messenger.sms_handler"/>
+      <argument type="collection"/>
+    </service>
+    <service id="messenger.bus.default.messenger.handlers_locator" class="Symfony\Component\Messenger\Handler\HandlersLocator">
+      <argument type="collection">
+        <argument key="Symfony\Component\Mailer\Messenger\SendEmailMessage" type="iterator">
+          <argument type="service" id=".messenger.handler_descriptor.tGvt0LH"/>
+        </argument>
+        <argument key="Symfony\Component\Notifier\Message\ChatMessage" type="iterator">
+          <argument type="service" id=".messenger.handler_descriptor.vMw0m61"/>
+        </argument>
+        <argument key="Symfony\Component\Notifier\Message\SmsMessage" type="iterator">
+          <argument type="service" id=".messenger.handler_descriptor.XZowc.T"/>
+        </argument>
+      </argument>
+    </service>
+    <service id="logger" class="Symfony\Component\HttpKernel\Log\Logger" public="false"/>
+    <service id=".service_locator.V.o0zE7" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="translation.loader.csv" type="service" id="translation.loader.csv"/>
+        <argument key="translation.loader.dat" type="service" id="translation.loader.dat"/>
+        <argument key="translation.loader.ini" type="service" id="translation.loader.ini"/>
+        <argument key="translation.loader.json" type="service" id="translation.loader.json"/>
+        <argument key="translation.loader.mo" type="service" id="translation.loader.mo"/>
+        <argument key="translation.loader.php" type="service" id="translation.loader.php"/>
+        <argument key="translation.loader.po" type="service" id="translation.loader.po"/>
+        <argument key="translation.loader.qt" type="service" id="translation.loader.qt"/>
+        <argument key="translation.loader.res" type="service" id="translation.loader.res"/>
+        <argument key="translation.loader.xliff" type="service" id="translation.loader.xliff"/>
+        <argument key="translation.loader.yml" type="service" id="translation.loader.yml"/>
+      </argument>
+    </service>
+    <service id=".service_locator.JFjjyG5" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="translator" type="service" id="translator.default"/>
+      </argument>
+    </service>
+    <service id=".service_locator.JFjjyG5.translation.warmer" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="translation.warmer"/>
+      <argument>translation.warmer</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.JFjjyG5" method="withContext"/>
+    </service>
+    <service id=".service_locator.ld1.260" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="routing.loader" type="service" id="routing.loader"/>
+      </argument>
+    </service>
+    <service id=".service_locator.ld1.260.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="router.default"/>
+      <argument>router.default</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ld1.260" method="withContext"/>
+    </service>
+    <service id=".service_locator.3TLJ8AE" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="router" type="service" id="router.default"/>
+      </argument>
+    </service>
+    <service id=".service_locator.3TLJ8AE.router.cache_warmer" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="router.cache_warmer"/>
+      <argument>router.cache_warmer</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.3TLJ8AE" method="withContext"/>
+    </service>
+    <service id=".service_locator.wnlveDj" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="reverse_container" type="service" id="reverse_container" on-invalid="ignore_uninitialized"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Bppmeg3" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="initialized_session" type="service" id="session" on-invalid="ignore_uninitialized"/>
+        <argument key="request_stack" type="service" id="request_stack"/>
+        <argument key="session" type="service" id="session" on-invalid="ignore"/>
+        <argument key="session_storage" type="service" id="session.storage.native" on-invalid="ignore"/>
+      </argument>
+    </service>
+    <service id=".service_locator.saJSzyL" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="browser" type="service" id="notifier.channel.browser"/>
+        <argument key="chat" type="service" id="notifier.channel.chat"/>
+        <argument key="email" type="service" id="notifier.channel.email"/>
+        <argument key="sms" type="service" id="notifier.channel.sms"/>
+      </argument>
+    </service>
+    <service id=".service_locator.YAvakM6" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="kernel" type="service" id="kernel"/>
+      </argument>
+    </service>
+    <service id="debug.event_dispatcher.inner" class="Symfony\Component\EventDispatcher\EventDispatcher" public="false"/>
+    <service id="debug.controller_resolver.inner" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver" public="false">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="debug.argument_resolver.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver" public="false">
+      <argument type="service" id="argument_metadata_factory"/>
+      <argument type="iterator">
+        <argument type="service" id="debug.argument_resolver.request_attribute"/>
+        <argument type="service" id="debug.argument_resolver.request"/>
+        <argument type="service" id="debug.argument_resolver.session"/>
+        <argument type="service" id="debug.argument_resolver.service"/>
+        <argument type="service" id="debug.argument_resolver.default"/>
+        <argument type="service" id="debug.argument_resolver.variadic"/>
+        <argument type="service" id="debug.argument_resolver.not_tagged_controller"/>
+      </argument>
+    </service>
+    <service id="debug.argument_resolver.request_attribute.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver" public="false"/>
+    <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver" public="false"/>
+    <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver" public="false"/>
+    <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
+      <argument type="service" id=".service_locator.I3K77mT"/>
+    </service>
+    <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
+    <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
+    <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
+      <argument type="service" id=".service_locator.I3K77mT"/>
+    </service>
+    <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
+      <argument type="service" id=".service_locator._pevYnr"/>
+      <argument type="collection">
+        <argument key="about">console.command.about</argument>
+        <argument key="assets:install">console.command.assets_install</argument>
+        <argument key="cache:clear">console.command.cache_clear</argument>
+        <argument key="cache:pool:clear">console.command.cache_pool_clear</argument>
+        <argument key="cache:pool:prune">console.command.cache_pool_prune</argument>
+        <argument key="cache:pool:delete">console.command.cache_pool_delete</argument>
+        <argument key="cache:pool:list">console.command.cache_pool_list</argument>
+        <argument key="cache:warmup">console.command.cache_warmup</argument>
+        <argument key="debug:config">console.command.config_debug</argument>
+        <argument key="config:dump-reference">console.command.config_dump_reference</argument>
+        <argument key="debug:container">console.command.container_debug</argument>
+        <argument key="lint:container">console.command.container_lint</argument>
+        <argument key="debug:autowiring">console.command.debug_autowiring</argument>
+        <argument key="debug:event-dispatcher">console.command.event_dispatcher_debug</argument>
+        <argument key="messenger:consume">console.command.messenger_consume_messages</argument>
+        <argument key="messenger:setup-transports">console.command.messenger_setup_transports</argument>
+        <argument key="debug:messenger">console.command.messenger_debug</argument>
+        <argument key="messenger:stop-workers">console.command.messenger_stop_workers</argument>
+        <argument key="debug:router">console.command.router_debug</argument>
+        <argument key="router:match">console.command.router_match</argument>
+        <argument key="debug:translation">console.command.translation_debug</argument>
+        <argument key="translation:update">console.command.translation_update</argument>
+        <argument key="lint:xliff">console.command.xliff_lint</argument>
+        <argument key="lint:yaml">console.command.yaml_lint</argument>
+        <argument key="debug:form">console.command.form_debug</argument>
+        <argument key="secrets:set">console.command.secrets_set</argument>
+        <argument key="secrets:remove">console.command.secrets_remove</argument>
+        <argument key="secrets:generate-keys">console.command.secrets_generate_key</argument>
+        <argument key="secrets:list">console.command.secrets_list</argument>
+        <argument key="secrets:decrypt-to-local">console.command.secrets_decrypt_to_local</argument>
+        <argument key="secrets:encrypt-from-local">console.command.secrets_encrypt_from_local</argument>
+      </argument>
+    </service>
+    <service id=".service_locator._pevYnr" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="console.command.about" type="service" id="console.command.about"/>
+        <argument key="console.command.assets_install" type="service" id="console.command.assets_install"/>
+        <argument key="console.command.cache_clear" type="service" id="console.command.cache_clear"/>
+        <argument key="console.command.cache_pool_clear" type="service" id="console.command.cache_pool_clear"/>
+        <argument key="console.command.cache_pool_delete" type="service" id="console.command.cache_pool_delete"/>
+        <argument key="console.command.cache_pool_list" type="service" id="console.command.cache_pool_list"/>
+        <argument key="console.command.cache_pool_prune" type="service" id="console.command.cache_pool_prune"/>
+        <argument key="console.command.cache_warmup" type="service" id="console.command.cache_warmup"/>
+        <argument key="console.command.config_debug" type="service" id="console.command.config_debug"/>
+        <argument key="console.command.config_dump_reference" type="service" id="console.command.config_dump_reference"/>
+        <argument key="console.command.container_debug" type="service" id="console.command.container_debug"/>
+        <argument key="console.command.container_lint" type="service" id="console.command.container_lint"/>
+        <argument key="console.command.debug_autowiring" type="service" id="console.command.debug_autowiring"/>
+        <argument key="console.command.event_dispatcher_debug" type="service" id="console.command.event_dispatcher_debug"/>
+        <argument key="console.command.form_debug" type="service" id="console.command.form_debug"/>
+        <argument key="console.command.messenger_consume_messages" type="service" id="console.command.messenger_consume_messages"/>
+        <argument key="console.command.messenger_debug" type="service" id="console.command.messenger_debug"/>
+        <argument key="console.command.messenger_setup_transports" type="service" id="console.command.messenger_setup_transports"/>
+        <argument key="console.command.messenger_stop_workers" type="service" id="console.command.messenger_stop_workers"/>
+        <argument key="console.command.router_debug" type="service" id="console.command.router_debug"/>
+        <argument key="console.command.router_match" type="service" id="console.command.router_match"/>
+        <argument key="console.command.secrets_decrypt_to_local" type="service" id="console.command.secrets_decrypt_to_local"/>
+        <argument key="console.command.secrets_encrypt_from_local" type="service" id="console.command.secrets_encrypt_from_local"/>
+        <argument key="console.command.secrets_generate_key" type="service" id="console.command.secrets_generate_key"/>
+        <argument key="console.command.secrets_list" type="service" id="console.command.secrets_list"/>
+        <argument key="console.command.secrets_remove" type="service" id="console.command.secrets_remove"/>
+        <argument key="console.command.secrets_set" type="service" id="console.command.secrets_set"/>
+        <argument key="console.command.translation_debug" type="service" id="console.command.translation_debug"/>
+        <argument key="console.command.translation_update" type="service" id="console.command.translation_update"/>
+        <argument key="console.command.xliff_lint" type="service" id="console.command.xliff_lint"/>
+        <argument key="console.command.yaml_lint" type="service" id="console.command.yaml_lint"/>
+      </argument>
+    </service>
+    <service id="Psr\Container\ContainerInterface" alias="service_container" public="false"/>
+    <service id="Symfony\Component\DependencyInjection\ContainerInterface" alias="service_container" public="false"/>
+    <service id="App\Shared\Domain\Bus\Command\Command" alias="App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommand" public="false"/>
+    <service id="App\Shared\Domain\Bus\Command\CommandBus" alias="App\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus" public="false"/>
+    <service id="App\Shared\Domain\Bus\Command\CommandHandler" alias="App\Backoffice\Auth\Application\Authenticate\AuthenticateUserCommandHandler" public="false"/>
+    <service id="App\Shared\Domain\Bus\Event\DomainEventSubscriber" alias="App\Backoffice\Courses\Application\Create\CreateBackofficeCourseOnCourseCreated" public="false"/>
+    <service id="App\Shared\Domain\Bus\Query\QueryBus" alias="App\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus" public="false"/>
+    <service id="App\Shared\Domain\Bus\Query\Response" alias="App\Backoffice\Courses\Application\BackofficeCoursesResponse" public="false"/>
+    <service id="App\Shared\Domain\Logger" alias="App\Shared\Infrastructure\Logger\MonologLogger" public="false"/>
+    <service id="App\Shared\Domain\RandomNumberGenerator" alias="App\Shared\Infrastructure\PhpRandomNumberGenerator" public="false"/>
+    <service id="App\Shared\Domain\UuidGenerator" alias="App\Shared\Infrastructure\RamseyUuidGenerator" public="false"/>
+    <service id="App\Backoffice\Auth\Domain\AuthRepository" alias="App\Backoffice\Auth\Infrastructure\Persistence\InMemoryAuthRepository" public="false"/>
+    <service id="Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface" alias="parameter_bag" public="false"/>
+    <service id="Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface" alias="parameter_bag" public="false"/>
+    <service id="Symfony\Component\EventDispatcher\EventDispatcherInterface" alias="debug.event_dispatcher" public="false"/>
+    <service id="Symfony\Contracts\EventDispatcher\EventDispatcherInterface" alias="debug.event_dispatcher" public="false"/>
+    <service id="Symfony\Component\HttpKernel\HttpKernelInterface" alias="http_kernel" public="false"/>
+    <service id="Symfony\Component\HttpFoundation\RequestStack" alias="request_stack" public="false"/>
+    <service id="Symfony\Component\HttpFoundation\UrlHelper" alias="url_helper" public="false"/>
+    <service id="Symfony\Component\HttpKernel\KernelInterface" alias="kernel" public="false"/>
+    <service id="Symfony\Component\Filesystem\Filesystem" alias="filesystem" public="false"/>
+    <service id="Symfony\Component\HttpKernel\Config\FileLocator" alias="file_locator" public="false"/>
+    <service id="Symfony\Component\DependencyInjection\ReverseContainer" alias="reverse_container" public="false"/>
+    <service id="Symfony\Component\String\Slugger\SluggerInterface" alias="slugger" public="false"/>
+    <service id="error_renderer.html" alias="error_handler.error_renderer.html"/>
+    <service id="error_renderer" alias="error_handler.error_renderer.serializer" public="false"/>
+    <service id="Psr\EventDispatcher\EventDispatcherInterface" alias="debug.event_dispatcher"/>
+    <service id="Psr\Container\ContainerInterface $parameterBag" alias="parameter_bag"/>
+    <service id="cache.app_clearer" alias="cache.default_clearer" public="true"/>
+    <service id="Psr\Cache\CacheItemPoolInterface" alias="cache.app" public="false"/>
+    <service id="Symfony\Component\Cache\Adapter\AdapterInterface" alias="cache.app" public="false"/>
+    <service id="Symfony\Contracts\Cache\CacheInterface" alias="cache.app" public="false"/>
+    <service id="Symfony\Contracts\Cache\TagAwareCacheInterface" alias="cache.app.taggable" public="false"/>
+    <service id="Symfony\Contracts\Translation\TranslatorInterface" alias="translator.default" public="false"/>
+    <service id="cache.default_redis_provider" alias=".cache_connection.GD_MSZC" public="false"/>
+    <service id="cache.default_memcached_provider" alias=".cache_connection.JKE6keX" public="false"/>
+    <service id="cache.default_pdo_provider" alias="database_connection" public="false"/>
+    <service id="Symfony\Component\HttpFoundation\Session\SessionInterface" alias="session" public="false"/>
+    <service id="Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface" alias="session.storage.native" public="false"/>
+    <service id="SessionHandlerInterface" alias="session.handler" public="false"/>
+    <service id="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface" alias="session.flash_bag" public="false"/>
+    <service id="session.storage.filesystem" alias="session.storage.mock_file" public="false"/>
+    <service id="session.storage" alias="session.storage.native"/>
+    <service id="Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface" alias="security.csrf.token_generator" public="false"/>
+    <service id="Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface" alias="security.csrf.token_storage" public="false"/>
+    <service id="Symfony\Component\Security\Csrf\CsrfTokenManagerInterface" alias="security.csrf.token_manager" public="false"/>
+    <service id="Symfony\Component\Form\ResolvedFormTypeFactoryInterface" alias="form.resolved_type_factory" public="false"/>
+    <service id="Symfony\Component\Form\FormRegistryInterface" alias="form.registry" public="false"/>
+    <service id="Symfony\Component\Form\FormFactoryInterface" alias="form.factory" public="false"/>
+    <service id="form.property_accessor" alias="property_accessor" public="false"/>
+    <service id="form.choice_list_factory" alias="form.choice_list_factory.cached" public="false"/>
+    <service id="Symfony\Component\Asset\Packages" alias="assets.packages" public="false"/>
+    <service id="Symfony\Component\Messenger\Transport\Serialization\SerializerInterface" alias="messenger.default_serializer" public="false"/>
+    <service id="messenger.default_bus" alias="messenger.bus.default" public="true"/>
+    <service id="Symfony\Component\Messenger\MessageBusInterface" alias="messenger.bus.default"/>
+    <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias="http_client"/>
+    <service id="mailer" alias="mailer.mailer"/>
+    <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
+    <service id="Symfony\Component\Mailer\Transport\TransportInterface" alias="mailer.default_transport"/>
+    <service id="Symfony\Component\Notifier\NotifierInterface" alias="notifier"/>
+    <service id="Symfony\Component\Notifier\ChatterInterface" alias="chatter"/>
+    <service id="Symfony\Component\Notifier\TexterInterface" alias="texter"/>
+    <service id="Symfony\Component\Validator\Validator\ValidatorInterface" alias="validator" public="false"/>
+    <service id="validator.mapping.class_metadata_factory" alias="validator" public="false"/>
+    <service id="Symfony\Component\Translation\Reader\TranslationReaderInterface" alias="translation.reader" public="false"/>
+    <service id="Symfony\Component\Translation\Extractor\ExtractorInterface" alias="translation.extractor" public="false"/>
+    <service id="Symfony\Component\Translation\Writer\TranslationWriterInterface" alias="translation.writer" public="false"/>
+    <service id="translator" alias="translator.default" public="true"/>
+    <service id="translator.formatter" alias="translator.formatter.default" public="false"/>
+    <service id="Symfony\Component\HttpKernel\Debug\FileLinkFormatter" alias="debug.file_link_formatter" public="false"/>
+    <service id="Symfony\Component\Stopwatch\Stopwatch" alias="debug.stopwatch" public="false"/>
+    <service id="router" alias="router.default" public="true"/>
+    <service id="Symfony\Component\Routing\RouterInterface" alias="router.default" public="false"/>
+    <service id="Symfony\Component\Routing\Generator\UrlGeneratorInterface" alias="router.default" public="false"/>
+    <service id="Symfony\Component\Routing\Matcher\UrlMatcherInterface" alias="router.default" public="false"/>
+    <service id="Symfony\Component\Routing\RequestContextAwareInterface" alias="router.default" public="false"/>
+    <service id="Symfony\Component\Routing\RequestContext" alias="router.request_context" public="false"/>
+    <service id="annotation_reader" alias="annotations.cached_reader"/>
+    <service id="Doctrine\Common\Annotations\Reader" alias="annotations.cached_reader" public="false"/>
+    <service id="Symfony\Component\PropertyAccess\PropertyAccessorInterface" alias="property_accessor" public="false"/>
+    <service id="Symfony\Component\Serializer\SerializerInterface" alias="serializer" public="false"/>
+    <service id="Symfony\Component\Serializer\Normalizer\NormalizerInterface" alias="serializer" public="false"/>
+    <service id="Symfony\Component\Serializer\Normalizer\DenormalizerInterface" alias="serializer" public="false"/>
+    <service id="Symfony\Component\Serializer\Encoder\EncoderInterface" alias="serializer" public="false"/>
+    <service id="Symfony\Component\Serializer\Encoder\DecoderInterface" alias="serializer" public="false"/>
+    <service id="serializer.property_accessor" alias="property_accessor" public="false"/>
+    <service id="Symfony\Component\Serializer\Mapping\ClassDiscriminatorResolverInterface" alias="serializer.mapping.class_discriminator_resolver" public="false"/>
+    <service id="Symfony\Component\Serializer\Normalizer\ObjectNormalizer" alias="serializer.normalizer.object" public="false"/>
+    <service id="Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface" alias="serializer.mapping.class_metadata_factory" public="false"/>
+    <service id="error_renderer.serializer" alias="error_handler.error_renderer.serializer" public="false"/>
+    <service id="Symfony\Component\PropertyInfo\PropertyAccessExtractorInterface" alias="property_info" public="false"/>
+    <service id="Symfony\Component\PropertyInfo\PropertyDescriptionExtractorInterface" alias="property_info" public="false"/>
+    <service id="Symfony\Component\PropertyInfo\PropertyInfoExtractorInterface" alias="property_info" public="false"/>
+    <service id="Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface" alias="property_info" public="false"/>
+    <service id="Symfony\Component\PropertyInfo\PropertyListExtractorInterface" alias="property_info" public="false"/>
+    <service id="Symfony\Component\PropertyInfo\PropertyInitializableExtractorInterface" alias="property_info" public="false"/>
+    <service id="container.env_var_processors_locator" alias=".service_locator.CmORmuK" public="true"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.I3K77mT"/>
+    <service id="Psr\Log\LoggerInterface" alias="logger" public="false"/>
+    <service id=".service_locator.BgI5J6G" alias="messenger.retry_strategy_locator" public="false"/>
+    <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
+    <service id="controller_resolver" alias="debug.controller_resolver" public="false"/>
+    <service id="argument_resolver" alias="debug.argument_resolver" public="false"/>
+    <service id="argument_resolver.request_attribute" alias="debug.argument_resolver.request_attribute" public="false"/>
+    <service id="argument_resolver.request" alias="debug.argument_resolver.request" public="false"/>
+    <service id="argument_resolver.session" alias="debug.argument_resolver.session" public="false"/>
+    <service id="argument_resolver.service" alias="debug.argument_resolver.service" public="false"/>
+    <service id="argument_resolver.default" alias="debug.argument_resolver.default" public="false"/>
+    <service id="argument_resolver.variadic" alias="debug.argument_resolver.variadic" public="false"/>
+    <service id="argument_resolver.not_tagged_controller" alias="debug.argument_resolver.not_tagged_controller" public="false"/>
+  </services>
+</container>
